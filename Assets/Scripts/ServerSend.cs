@@ -72,20 +72,20 @@ public class ServerSend
     {
         using (Packet _packet = new Packet((int)ServerPackets.spawnPlayer))
         {
-            _packet.Write(_player.id);
-            _packet.Write(_player.username);
+            _packet.Write(_player.ID);
+            _packet.Write(_player.Username);
             _packet.Write(_player.transform.position);
             _packet.Write(_player.transform.rotation);
 
             SendTCPData(_toClient, _packet);
         }
     }
-
+    //TODO: 
     public static void PlayerPosition(Player _player)
     {
-        using (Packet _packet = new Packet((int)ServerPackets.playerDirection))
+        using (Packet _packet = new Packet((int)ServerPackets.playerPosition))
         {
-            _packet.Write(_player.id);
+            _packet.Write(_player.ID);
             _packet.Write(_player.transform.position);
 
             SendUDPDataToAll(_packet);
@@ -96,10 +96,10 @@ public class ServerSend
     {
         using (Packet _packet = new Packet((int)ServerPackets.playerRotation))
         {
-            _packet.Write(_player.id);
+            _packet.Write(_player.ID);
             _packet.Write(_player.transform.rotation);
 
-            SendUDPDataToAll(_player.id, _packet);
+            SendUDPDataToAll(_player.ID, _packet);
         }
     }
 
@@ -112,6 +112,14 @@ public class ServerSend
             SendTCPDataToAll(_packet);
         }
     }
-
+    public static void PlayerAnimation(Player _player)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.playerAnimataion))
+        {
+            _packet.Write(_player.ID);
+            _packet.Write(_player.GetAnimationModel());
+            SendTCPDataToAll(_packet);
+        }
+    }
     #endregion
 }

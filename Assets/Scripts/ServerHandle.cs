@@ -18,18 +18,9 @@ public class ServerHandle
         Server.clients[_fromClient].SendIntoGame(_username);
     }
 
-    public static void PlayerMovement(int _fromClient, Packet _packet)
+    public static void PlayerInput(int fromClient, Packet packet)
     {
-        //TODO: replace this shit 
-        float[] _inputs = new float[_packet.ReadInt()];
-        for (int i = 0; i < _inputs.Length; i++)
-        {
-            _inputs[i] = _packet.ReadFloat();
-        }
-
-        bool _isJumping = _packet.ReadBool();
-        Quaternion _rotation = _packet.ReadQuaternion();
-
-        Server.clients[_fromClient].player.SetInput(_inputs, _rotation, _isJumping);
+        Server.clients[fromClient].player.SetInput(packet.ReadInputModel());
     }
+    
 }

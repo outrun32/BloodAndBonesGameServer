@@ -9,16 +9,17 @@ public enum ServerPackets
 {
     welcome = 1,
     spawnPlayer,
-    playerDirection,
+    playerPosition,
     playerRotation,
-    playerDisconnected
+    playerDisconnected,
+    playerAnimataion
 }
 
 /// <summary>Sent from client to server.</summary>
 public enum ClientPackets
 {
     welcomeReceived = 1,
-    playerMovement
+    playerInput
 }
 
 public class Packet : IDisposable
@@ -162,6 +163,13 @@ public class Packet : IDisposable
         Write(_value.Length); // Add the length of the string to the packet
         buffer.AddRange(Encoding.ASCII.GetBytes(_value)); // Add the string itself
     }
+    /// <summary>Adds a Vector2 to the packet.</summary>
+    /// <param name="_value">The Vector2 to add.</param>
+    public void Write(Vector2 _value)
+    {
+        Write(_value.x);
+        Write(_value.y);
+    }
     /// <summary>Adds a Vector3 to the packet.</summary>
     /// <param name="_value">The Vector3 to add.</param>
     public void Write(Vector3 _value)
@@ -179,8 +187,31 @@ public class Packet : IDisposable
         Write(_value.z);
         Write(_value.w);
     }
-
-
+    /// <summary>Adds a InputModel to the packet.</summary>
+    /// <param name="_value">The InputModel to add.</param>
+    public void Write(InputModel value)
+    {
+        Write(value.JoystickAxis);
+        Write(value.Rotation);
+        Write(value.IsJumping);
+        Write(value.IsAttacking);
+        Write(value.IsBlocking);
+        Write(value.IsSuperAtacking);
+        Write(value.IsStrafing);
+        Write(value.IsSat);
+    }
+    /// <summary>Adds a AnimationModel to the packet.</summary>
+    /// <param name="_value">The InputModel to add.</param>
+    public void Write(AnimationModel value)
+    {
+        Write(value.Speed);
+        Write(value.SpeedX);
+        Write(value.SpeedY);
+        Write(value.AttackInd);
+        Write(value.BlockInd);
+        Write(value.IsAttack);
+        Write(value.IsSupedAttack);
+    }
     #endregion
 
     #region Read Data
@@ -357,6 +388,15 @@ public class Packet : IDisposable
     /// </summary>
     /// <param name="_moveReadPos">Whether or not to move the buffer's read position.</param>
     /// <returns>Vector3</returns>
+    public Vector2 ReadVector2(bool _moveReadPos = true)
+    {
+        return new Vector2(ReadFloat(_moveReadPos), ReadFloat(_moveReadPos));
+    }
+    /// <summary>
+    /// Reads a Vector3 from the packet
+    /// </summary>
+    /// <param name="_moveReadPos">Whether or not to move the buffer's read position.</param>
+    /// <returns>Vector3</returns>
     public Vector3 ReadVector3(bool _moveReadPos = true)
     {
         return new Vector3(ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos));
@@ -369,6 +409,15 @@ public class Packet : IDisposable
     public Quaternion ReadQuaternion(bool _moveReadPos = true)
     {
         return new Quaternion(ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos));
+    }
+    /// <summary>
+    /// Reads a InputModel from the packet
+    /// </summary>
+    /// <param name="_moveReadPos">Whether or not to move the buffer's read position.</param>
+    /// <returns>Vector3</returns>
+    public InputModel ReadInputModel(bool _moveReadPos = true)
+    {
+        return new InputModel(ReadVector2(_moveReadPos), ReadQuaternion(_moveReadPos), ReadBool(_moveReadPos), ReadBool(_moveReadPos), ReadBool(_moveReadPos), ReadBool(_moveReadPos), ReadBool(_moveReadPos), ReadBool(_moveReadPos));
     }
     #endregion
 
