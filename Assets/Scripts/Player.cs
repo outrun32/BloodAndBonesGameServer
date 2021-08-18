@@ -30,6 +30,16 @@ public class Player : MonoBehaviour
     [SerializeField] private float _startMana;
     [Header("Animation")] 
     [SerializeField] private Animator _animator;
+
+    public float MAXHealth => _maxHealth;
+
+    public float StartHealth => _startHealth;
+
+    public float MAXMana => _maxMana;
+
+    public float StartMana => _startMana;
+    public float Health => _healthController.Health;
+    public float Mana => _manaController.Mana;
     public void Initialize(int id, string username)
     {
         _id = id;
@@ -58,11 +68,13 @@ public class Player : MonoBehaviour
         ServerSend.PlayerPosition(this);
         ServerSend.PlayerRotation(this);
         ServerSend.PlayerAnimation(this);
+        ServerSend.PlayerInfo(this);
     }
     public void SetInput(InputModel inputModel)
     {
         _movementController.SetInput(inputModel);
         _animationController.Update(inputModel);
+        if (inputModel.IsAttacking) _attackController.Attack(10);
     }
 
     public AnimationModel GetAnimationModel()

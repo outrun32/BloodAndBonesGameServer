@@ -10,10 +10,12 @@ namespace Controllers.Character.Attack
         public string[] tags;
         private void OnTriggerExit(Collider other)
         {
+            Debug.LogWarning(other.tag);
             foreach (string tag in tags)
             { 
                 if (other.gameObject.CompareTag(tag))
                 {
+                    Debug.LogWarning("Attack Player");
                     ReturnObjectEvent?.Invoke(other.gameObject);
                 }
             }
