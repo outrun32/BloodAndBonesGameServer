@@ -24,9 +24,13 @@ namespace Controllers.Character.Attack
         {
             _isAttack = false;
         }
-        private void SetDamage(GameObject gameObject)
+        private void SetDamage(GameObject target)
         {
-            if (_isAttack) gameObject.SendMessage("AddDamage", _damage);
+            if (_isAttack && target != this.gameObject)
+            {
+                target.SendMessage("AddDamage", _damage);
+                Debug.Log("AddDamage");
+            }
         }
         private void OnDisable()
         {

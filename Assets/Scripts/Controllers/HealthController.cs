@@ -25,8 +25,8 @@ namespace Controllers
 
         public void Initialize(float startHealth, float maxHealth)
         {
-            SetHealth(startHealth);
             SetMaxHealth(maxHealth);
+            SetHealth(startHealth);
         }
         protected void SetMaxHealth(float value)
         {

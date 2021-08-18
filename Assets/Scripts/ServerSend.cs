@@ -76,7 +76,11 @@ public class ServerSend
             _packet.Write(_player.Username);
             _packet.Write(_player.transform.position);
             _packet.Write(_player.transform.rotation);
-
+            _packet.Write(_player.MAXHealth);
+            _packet.Write(_player.MAXMana);
+            _packet.Write(_player.StartHealth);
+            _packet.Write(_player.StartMana);
+                
             SendTCPData(_toClient, _packet);
         }
     }
@@ -118,6 +122,16 @@ public class ServerSend
         {
             _packet.Write(_player.ID);
             _packet.Write(_player.GetAnimationModel());
+            SendTCPDataToAll(_packet);
+        }
+    }
+    public static void PlayerInfo(Player _player)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.playerInfo))
+        {
+            _packet.Write(_player.ID);
+            _packet.Write(_player.Health);
+            _packet.Write(_player.Mana);
             SendTCPDataToAll(_packet);
         }
     }
