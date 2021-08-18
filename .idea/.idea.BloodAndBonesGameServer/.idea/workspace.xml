@@ -46,12 +46,13 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Models/AnimationModel.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Packet.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Server.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/ServerHandle.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Client.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Animation/MovementSTB.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/AnimationController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/ServerSend.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/ServerHandle.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/AtackSTB.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1wqns0dlUIBHibJRDq75cvY4ufM" />
@@ -105,7 +106,7 @@
       <updated>1629195189820</updated>
       <workItem from="1629195195732" duration="603000" />
       <workItem from="1629267046085" duration="4923000" />
-      <workItem from="1629282583867" duration="11925000" />
+      <workItem from="1629282583867" duration="12420000" />
     </task>
     <servers />
   </component>
