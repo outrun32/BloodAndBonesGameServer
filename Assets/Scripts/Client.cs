@@ -188,15 +188,15 @@ class Client
 
 
     /// <summary>
-    /// Метод для создания игрока и отправки его в игру
+    /// РњРµС‚РѕРґ РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РёРіСЂРѕРєР° Рё РѕС‚РїСЂР°РІРєРё РµРіРѕ РІ РёРіСЂСѓ
     /// </summary>
-    /// <param name="_playerName">Имя игрока</param>
+    /// <param name="_playerName">РРјСЏ РёРіСЂРѕРєР°</param>
     public void SendIntoGame(string _playerName)
     {
         player = NetworkManager.instance.InstantiatePlayer();
         player.Initialize(id, _playerName);
 
-        //отправляем информацию о всех игроках клиенту, чтобы они появились в его мире
+        //РѕС‚РїСЂР°РІР»СЏРµРј РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РІСЃРµС… РёРіСЂРѕРєР°С… РєР»РёРµРЅС‚Сѓ, С‡С‚РѕР±С‹ РѕРЅРё РїРѕСЏРІРёР»РёСЃСЊ РІ РµРіРѕ РјРёСЂРµ
         foreach (Client _client in Server.clients.Values)
         {
             if (_client.player != null)
@@ -208,7 +208,7 @@ class Client
                 }
             }
         }
-        //аналогичное, но для клиента
+        //Р°РЅР°Р»РѕРіРёС‡РЅРѕРµ, РЅРѕ РґР»СЏ РєР»РёРµРЅС‚Р°
         foreach (Client _client in Server.clients.Values)
         {
             if (_client.player != null)

@@ -1,88 +1,72 @@
-using System.Collections;
-using System.Collections.Generic;
+using Controllers;
+using Controllers.Character;
+using Controllers.Character.Attack;
+using Interfaces.Attack;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int id;
-    public string username;
-
-    public CharacterController characterController;
-
-    [SerializeField]private float moveSpeed = 5f;
-    public float gravity = Physics.gravity.y;
-    [SerializeField]private float _jumpHeight;
-
-    private Vector3 groundDirection;
-
-    private bool _isJumping;
-
-    private Vector3 playerVelocity;
-    bool _isGrounded;
-
-    private float[] _inputs;
-
-    public void Initialize(int _id, string _username)
+    private int _id;
+    private string _username;
+    public int ID => _id;
+    public string Username => _username;
+    [Header("Controllers")]
+    private MovementController _movementController;
+    private AnimationController _animationController;
+    
+    [SerializeField] private HealthController _healthController;
+    [SerializeField] private ManaController _manaController;
+    protected IAttack _attackController;
+    [Header("Movement")]
+    [SerializeField] private CharacterController _characterController;
+    [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _gravity = Physics.gravity.y;
+    [SerializeField] private float _jumpHeight;
+    [Header("Health")] 
+    [SerializeField] private float _maxHealth;
+    [SerializeField] private float _startHealth;
+    [Header("Mana")] 
+    [SerializeField] private float _maxMana;
+    [SerializeField] private float _startMana;
+    [Header("Animation")] 
+    [SerializeField] private Animator _animator;
+    public void Initialize(int id, string username)
     {
-        id = _id;
-        username = _username;
-
-        _inputs = new float[2];
+        _id = id;
+        _username = username;
+        _movementController = new MovementController(_characterController, _moveSpeed, _jumpHeight, this.transform);
+        _healthController.Initialize(_startHealth, _maxHealth);
+        _manaController.Initialize(_startMana, _maxMana);
+        _animationController = new AnimationController(_animator);
     }
 
-    private void Start()
+    public virtual void Start()
     {
-        gravity *= Time.fixedDeltaTime * Time.fixedDeltaTime;
+        _movementController.Start();
+        _attackController.NStart();
     }
-
 
     public void FixedUpdate()
     {
-        Vector2 floatInput = new Vector2(_inputs[0], _inputs[1]);
-        Move(floatInput);
-        Jump();
-        _isGrounded = characterController.isGrounded;
-
-        //ŒÚÔ‡‚Í‡ ‰‡ÌÌ˚ı
+        _movementController.FixedUpdate();
+        //–û—Ç–ø—Ä–∞–≤–∫–∞ –¥–∞–Ω–Ω—ã—Ö
         SendPlayerData();
     }
-
-    private void Move(Vector2 _inputDirection)
-    {
-        Vector3 direction = ((transform.forward * _inputDirection.y + transform.right * _inputDirection.x) * moveSpeed) * Time.fixedDeltaTime;
-        if (_isGrounded)
-        {
-            groundDirection = direction;
-        }
-        characterController.Move(groundDirection);
-    }
-
+    
     private void SendPlayerData()
     {
         ServerSend.PlayerPosition(this);
         ServerSend.PlayerRotation(this);
+        ServerSend.PlayerAnimation(this);
+    }
+    public void SetInput(InputModel inputModel)
+    {
+        _movementController.SetInput(inputModel);
+        _animationController.Update(inputModel);
     }
 
-    public void Jump()
+    public AnimationModel GetAnimationModel()
     {
-        playerVelocity.y += gravity;
-        if (_isGrounded)
-        {
-            playerVelocity.y = 0f;
-        }
-        Debug.Log($"Controller: {characterController.isGrounded}");
-        Debug.Log($"is Jumping: {_isJumping}");
-        if (_isGrounded && _isJumping)
-        {
-            playerVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * gravity);
-        }
-        characterController.Move(playerVelocity);
-    }
-
-    public void SetInput(float[] inputs, Quaternion rotation, bool isJumping)
-    {
-        _inputs = inputs;
-        transform.rotation = rotation;
-        _isJumping = isJumping;
+        return _animationController.GetAnimationModel();
     }
 }
