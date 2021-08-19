@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     private MovementController _movementController;
     private AnimationController _animationController;
     
-    [SerializeField] private HealthController _healthController;
+    [SerializeField] private DamageController _damageController;
     [SerializeField] private ManaController _manaController;
     protected IAttack _attackController;
     [Header("Movement")]
@@ -38,21 +38,24 @@ public class Player : MonoBehaviour
     public float MAXMana => _maxMana;
 
     public float StartMana => _startMana;
-    public float Health => _healthController.Health;
+    public float Health => _damageController.Health;
     public float Mana => _manaController.Mana;
     public void Initialize(int id, string username)
     {
         _id = id;
         _username = username;
         _movementController = new MovementController(_characterController, _moveSpeed, _jumpHeight, this.transform);
-        _healthController.Initialize(_startHealth, _maxHealth);
+        _damageController.Initialize(_startHealth, _maxHealth);
+        _damageController.Damage += Damage;
         _manaController.Initialize(_startMana, _maxMana);
         _animationController = new AnimationController(_animator);
+        _animationController.StopAttackEvent += EndAttack;
     }
 
     public virtual void Start()
     {
         _movementController.Start();
+        
         _attackController.NStart();
     }
 
@@ -74,11 +77,25 @@ public class Player : MonoBehaviour
     {
         _movementController.SetInput(inputModel);
         _animationController.Update(inputModel);
-        if (inputModel.IsAttacking) _attackController.Attack(10);
+        if (inputModel.IsAttacking)
+        {
+            _attackController.SetAttack(GetAnimationModel().AttackInd);
+            _attackController.Attack(10);
+        }
     }
 
     public AnimationModel GetAnimationModel()
     {
         return _animationController.GetAnimationModel();
+    }
+
+    public void EndAttack(bool value)
+    {
+        _attackController.EndAttack();
+    }
+
+    public void Damage()
+    {
+        _animationController.Damage(2);
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.Tracing;
 using UnityEngine;
 
 namespace Controllers.Character.Attack
@@ -8,17 +9,29 @@ namespace Controllers.Character.Attack
     {
         public event ReturnObject ReturnObjectEvent;
         public string[] tags;
-        private void OnTriggerExit(Collider other)
+        public Collider Collider;
+        private void OnTriggerEnter(Collider other)
         {
-            Debug.LogWarning(other.tag);
+            //Debug.LogWarning(other.name);
             foreach (string tag in tags)
             { 
                 if (other.gameObject.CompareTag(tag))
                 {
-                    Debug.LogWarning("Attack Player");
+                    //Debug.LogWarning("ATTACK PLAYER");
                     ReturnObjectEvent?.Invoke(other.gameObject);
                 }
             }
+        }
+
+         public void StartTracking()
+         {
+             Collider.enabled = true;
+         }
+
+        public void StopTracking()
+        {
+            Collider.enabled = false;
+
         }
     }
 }
