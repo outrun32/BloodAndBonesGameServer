@@ -19,6 +19,8 @@ namespace Controllers.Character
         bool _isGrounded;
 
         private Vector2 _inputs;
+        private bool _canMove;
+        private bool _moveUntil;
 
         public MovementController(CharacterController characterController, float moveSpeed, float jumpHeight, Transform transform)
         {
@@ -35,8 +37,18 @@ namespace Controllers.Character
         public void FixedUpdate()
         {
             Vector2 floatInput = _inputs;
-            Move(floatInput);
-            Jump();
+            if (_canMove)
+            {
+                Move(floatInput);
+                Jump();
+            }
+
+            if (_moveUntil)
+            {
+                Debug.Log("_moveUntil");
+                Move(Vector2.up);
+                Jump();
+            }
             _isGrounded = _characterController.isGrounded;
         }
         private void Move(Vector2 _inputDirection)
@@ -66,6 +78,21 @@ namespace Controllers.Character
             _inputs = inputModel.JoystickAxis;
             _transform.rotation = inputModel.Rotation;
             _isJumping = inputModel.IsJumping;
+        }
+
+        public void SetCanMove(bool value)
+        {
+            _canMove = value;
+        }
+
+        public void MoveUntil()
+        {
+            _moveUntil = true;
+        }
+
+        public void StopMoveUntil()
+        {
+            _moveUntil = false;
         }
     }
     

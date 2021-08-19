@@ -7,9 +7,8 @@ namespace Controllers.Character.Attack
 {
     public class MeleeAttackController : MonoBehaviour, IAttack
     {
-        
         [SerializeField] private List<SwordController> _swordControllers;
-
+        
         private List<GameObject> _objects = new List<GameObject>();
         private float _damage = 0;
         private bool _isAttack = false;
@@ -66,5 +65,8 @@ namespace Controllers.Character.Attack
                 swordController.ReturnObjectEvent -= SetDamage;
             }
         }
+
+      
+        
     }
 }

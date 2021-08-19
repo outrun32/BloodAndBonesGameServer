@@ -2214,6 +2214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8031117787987248149}
   - component: {fileID: 6207336397208688603}
+  - component: {fileID: 6193757787640796911}
   m_Layer: 0
   m_Name: Player_knight
   m_TagString: Untagged
@@ -2258,6 +2259,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6193757787640796911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7223654777165274799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fbc35a781de0774ba400c8f0fc2110b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MeleePlayerController: {fileID: 91771490951919401}
 --- !u!1 &7355752238191379470
 GameObject:
   m_ObjectHideFlags: 0
@@ -2408,6 +2422,7 @@ MonoBehaviour:
   _startMana: 100
   _animator: {fileID: 6207336397208688603}
   _meleeAttackController: {fileID: 6877136497482585597}
+  _distanceTeleport: 2.8
 --- !u!1 &7495619775315526216
 GameObject:
   m_ObjectHideFlags: 0

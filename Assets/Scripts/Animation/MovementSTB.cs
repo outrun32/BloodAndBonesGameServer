@@ -19,4 +19,5 @@ public class MovementSTB : StateMachineBehaviour
         animator.SetFloat("Speed", speedVector2.magnitude);
     }   
     
+    
 }

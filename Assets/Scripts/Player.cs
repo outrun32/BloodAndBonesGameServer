@@ -8,15 +8,15 @@ public class Player : MonoBehaviour
 {
     private int _id;
     private string _username;
-    public int ID => _id;
-    public string Username => _username;
+    private bool _isBlocking;
     [Header("Controllers")]
-    private MovementController _movementController;
+    protected MovementController _movementController;
     private AnimationController _animationController;
+    protected IAttack _attackController;
     
     [SerializeField] private DamageController _damageController;
     [SerializeField] private ManaController _manaController;
-    protected IAttack _attackController;
+    
     [Header("Movement")]
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private float _moveSpeed;
@@ -31,15 +31,24 @@ public class Player : MonoBehaviour
     [Header("Animation")] 
     [SerializeField] private Animator _animator;
 
+    public int ID => _id;
+    public string Username => _username;
     public float MAXHealth => _maxHealth;
-
     public float StartHealth => _startHealth;
-
     public float MAXMana => _maxMana;
-
     public float StartMana => _startMana;
     public float Health => _damageController.Health;
     public float Mana => _manaController.Mana;
+
+    public bool IsBlocking
+    {
+        get => _isBlocking;
+        set
+        {
+            _damageController.SetDamageState(value);
+            _isBlocking = value;
+        }
+    }
     public void Initialize(int id, string username)
     {
         _id = id;
@@ -57,6 +66,7 @@ public class Player : MonoBehaviour
         _movementController.Start();
         
         _attackController.NStart();
+        _movementController.SetCanMove(true);
     }
 
     public void FixedUpdate()
@@ -79,9 +89,13 @@ public class Player : MonoBehaviour
         _animationController.Update(inputModel);
         if (inputModel.IsAttacking)
         {
+            _movementController.SetCanMove(false);
+            Debug.Log(GetAnimationModel().AttackInd);
+            if (GetAnimationModel().AttackInd == 4) _movementController.MoveUntil();
             _attackController.SetAttack(GetAnimationModel().AttackInd);
             _attackController.Attack(10);
         }
+        IsBlocking = inputModel.IsBlocking;
     }
 
     public AnimationModel GetAnimationModel()
@@ -91,6 +105,7 @@ public class Player : MonoBehaviour
 
     public void EndAttack(bool value)
     {
+        _movementController.SetCanMove(true);
         _attackController.EndAttack();
     }
 

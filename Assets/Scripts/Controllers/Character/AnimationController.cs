@@ -22,6 +22,7 @@ namespace Controllers.Character
             _animator.SetBool("Jump", inputModel.IsJumping);
             _animator.SetBool("Attack", inputModel.IsAttacking);
             _animator.SetBool("SuperAttack", inputModel.IsSuperAtacking);
+            _animator.SetBool("Block", inputModel.IsBlocking);
         }
 
         public AnimationModel GetAnimationModel()
@@ -41,14 +42,16 @@ namespace Controllers.Character
                 _animator.GetFloat("SpeedX"),
                 _animator.GetFloat("SpeedY"),
                 _animator.GetInteger("AttackInd"),
-                _animator.GetInteger("BlockInd"),
+                _animator.GetInteger("HitInd"),
                 _animator.GetBool("Attack"),
-                _animator.GetBool("SuperAttack"));
+                _animator.GetBool("SuperAttack"),
+                _animator.GetBool("Block"),
+                _animator.GetBool("BlockImpact"));
         }
 
         public void Damage(int value)
         {
-            _animator.SetInteger("BlockInd", value);
+            _animator.SetInteger("HitInd", value);
         }
     }
 }

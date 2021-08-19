@@ -6,18 +6,22 @@ public struct AnimationModel
     public float SpeedX;
     public float SpeedY;
     public int AttackInd;
-    public int BlockInd;
+    public int HitInd;
+    public bool IsBlock;
+    public bool IsBlockImpact;
     public bool IsAttack;
-    public bool IsSupedAttack;
+    public bool IsSuperAttack;
 
-    public AnimationModel(float speed, float speedX, float speedY, int attackInd, int blockInd, bool isAttack, bool isSupedAttack)
+    public AnimationModel(float speed, float speedX, float speedY, int attackInd, int hitInd, bool isAttack, bool isSuperAttack, bool isBlock, bool isBlockImpact)
     {
         Speed = speed;
         SpeedX = speedX;
         SpeedY = speedY;
         AttackInd = attackInd;
-        BlockInd = blockInd;
+        HitInd = hitInd;
         IsAttack = isAttack;
-        IsSupedAttack = isSupedAttack;
+        IsSuperAttack = isSuperAttack;
+        IsBlock = isBlock;
+        IsBlockImpact = isBlockImpact;
     }
 }
