@@ -1,3 +1,5 @@
+using Delegates;
+
 namespace Controllers
 {
     public class DamageController : HealthController
@@ -8,8 +10,8 @@ namespace Controllers
         //Invoked in AttackControllers on SendMassage()
         public void AddDamage(float value)
         {
-            Damage?.Invoke();
             if (!_isNotDamage) SubHealth(value);
+            Damage?.Invoke();
         }
 
         public void SetDamageState(bool value)

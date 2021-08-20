@@ -26,7 +26,6 @@ public class NetworkManager : MonoBehaviour
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
-
         Server.Start(10, 26950);
     }
 
@@ -35,9 +34,19 @@ public class NetworkManager : MonoBehaviour
         Server.Stop();
     }
 
+    private void Respawn(Player player)
+    {
+        Debug.Log("RESPAWN");
+        player.DeathPlayerEvent -= Respawn;
+        Server.clients[player.ID].Respawn(player.Username);
+        Destroy(player.gameObject);
+        
+    }
     public Player InstantiatePlayer()
     {
-        return Instantiate(playerPrefab, new Vector3(Random.Range(-10f, 10f), 0, Random.Range(-10f, 10f)),
+        Player instantiate = Instantiate(playerPrefab, new Vector3(Random.Range(-10f, 10f), 0, Random.Range(-10f, 10f)),
             Quaternion.identity);
+        instantiate.DeathPlayerEvent += Respawn;
+        return instantiate;
     }
 }

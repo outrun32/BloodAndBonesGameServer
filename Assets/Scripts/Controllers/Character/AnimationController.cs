@@ -1,11 +1,11 @@
+using Delegates;
 using UnityEngine;
 
 namespace Controllers.Character
 {
-    public delegate void ReturnBool(bool value);
     public class AnimationController
     {
-        public ReturnBool StopAttackEvent;
+        public ReturnVoid StopAttackEvent;
         private bool _isAttacking = false;
         private Animator _animator;
 
@@ -32,7 +32,7 @@ namespace Controllers.Character
                 if (_animator.GetBool("EndAttack"))
                 {
                     _animator.SetBool("EndAttack", false);
-                    StopAttackEvent?.Invoke(true);
+                    StopAttackEvent?.Invoke();
                 }
 
                 
@@ -46,12 +46,17 @@ namespace Controllers.Character
                 _animator.GetBool("Attack"),
                 _animator.GetBool("SuperAttack"),
                 _animator.GetBool("Block"),
-                _animator.GetBool("BlockImpact"));
+                _animator.GetBool("BlockImpact"),
+                _animator.GetBool("Death"));
         }
 
         public void Damage(int value)
         {
             _animator.SetInteger("HitInd", value);
+        }
+        public void Death()
+        {
+            _animator.SetBool("Death", true);
         }
     }
 }
