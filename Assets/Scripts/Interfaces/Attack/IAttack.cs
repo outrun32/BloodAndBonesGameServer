@@ -8,6 +8,7 @@ namespace Interfaces.Attack
     {
         public void NStart();
         public void Attack(float damage);
+        public void SetAttack(int index);
         public void EndAttack();
     }
 }

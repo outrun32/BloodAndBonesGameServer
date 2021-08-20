@@ -209,9 +209,11 @@ public class Packet : IDisposable
         Write(value.SpeedX);
         Write(value.SpeedY);
         Write(value.AttackInd);
-        Write(value.BlockInd);
+        Write(value.HitInd);
         Write(value.IsAttack);
-        Write(value.IsSupedAttack);
+        Write(value.IsSuperAttack);
+        Write(value.IsBlock);
+        Write(value.IsBlockImpact);
     }
     #endregion
 

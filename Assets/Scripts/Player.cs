@@ -8,15 +8,15 @@ public class Player : MonoBehaviour
 {
     private int _id;
     private string _username;
-    public int ID => _id;
-    public string Username => _username;
+    private bool _isBlocking;
     [Header("Controllers")]
-    private MovementController _movementController;
+    protected MovementController _movementController;
     private AnimationController _animationController;
-    
-    [SerializeField] private HealthController _healthController;
-    [SerializeField] private ManaController _manaController;
     protected IAttack _attackController;
+    
+    [SerializeField] private DamageController _damageController;
+    [SerializeField] private ManaController _manaController;
+    
     [Header("Movement")]
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private float _moveSpeed;
@@ -31,29 +31,42 @@ public class Player : MonoBehaviour
     [Header("Animation")] 
     [SerializeField] private Animator _animator;
 
+    public int ID => _id;
+    public string Username => _username;
     public float MAXHealth => _maxHealth;
-
     public float StartHealth => _startHealth;
-
     public float MAXMana => _maxMana;
-
     public float StartMana => _startMana;
-    public float Health => _healthController.Health;
+    public float Health => _damageController.Health;
     public float Mana => _manaController.Mana;
+
+    public bool IsBlocking
+    {
+        get => _isBlocking;
+        set
+        {
+            _damageController.SetDamageState(value);
+            _isBlocking = value;
+        }
+    }
     public void Initialize(int id, string username)
     {
         _id = id;
         _username = username;
         _movementController = new MovementController(_characterController, _moveSpeed, _jumpHeight, this.transform);
-        _healthController.Initialize(_startHealth, _maxHealth);
+        _damageController.Initialize(_startHealth, _maxHealth);
+        _damageController.Damage += Damage;
         _manaController.Initialize(_startMana, _maxMana);
         _animationController = new AnimationController(_animator);
+        _animationController.StopAttackEvent += EndAttack;
     }
 
     public virtual void Start()
     {
         _movementController.Start();
+        
         _attackController.NStart();
+        _movementController.SetCanMove(true);
     }
 
     public void FixedUpdate()
@@ -74,11 +87,30 @@ public class Player : MonoBehaviour
     {
         _movementController.SetInput(inputModel);
         _animationController.Update(inputModel);
-        if (inputModel.IsAttacking) _attackController.Attack(10);
+        if (inputModel.IsAttacking)
+        {
+            _movementController.SetCanMove(false);
+            Debug.Log(GetAnimationModel().AttackInd);
+            if (GetAnimationModel().AttackInd == 4) _movementController.MoveUntil();
+            _attackController.SetAttack(GetAnimationModel().AttackInd);
+            _attackController.Attack(10);
+        }
+        IsBlocking = inputModel.IsBlocking;
     }
 
     public AnimationModel GetAnimationModel()
     {
         return _animationController.GetAnimationModel();
+    }
+
+    public void EndAttack(bool value)
+    {
+        _movementController.SetCanMove(true);
+        _attackController.EndAttack();
+    }
+
+    public void Damage()
+    {
+        _animationController.Damage(2);
     }
 }
