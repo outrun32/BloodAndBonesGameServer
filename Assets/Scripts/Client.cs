@@ -218,6 +218,24 @@ class Client
         }
 
     }
+    /// <summary>
+    /// Метод для создания игрока и отправки его в игру
+    /// </summary>
+    /// <param name="_playerName">Имя игрока</param>
+    public void Respawn(string _playerName)
+    {
+        player = NetworkManager.instance.InstantiatePlayer();
+        player.Initialize(id, _playerName);
+        //аналогичное, но для клиента
+        foreach (Client _client in Server.clients.Values)
+        {
+            if (_client.player != null)
+            {
+                ServerSend.SpawnPlayer(_client.id, player);
+            }
+        }
+
+    }
 
     private void Disconnect()
     {

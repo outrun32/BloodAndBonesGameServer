@@ -41,16 +41,11 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/ManaController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/Attack/MeleeAttack.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Models/InputModel.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Server.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Client.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/ServerHandle.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/HealthController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/ServerSend.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Interfaces/Attack/IAttack.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/TestDamage.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Test/TestDamage.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/Attack/SwordController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Others/Delegates.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Animation/SetIntExitSTB.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Animation/SetIntEnterSMB.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Animation/MovementSTB.cs" />
@@ -59,12 +54,17 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/MeleePlayerController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/MovementController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Animation/AtackSTB.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/NetworkManager.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/DamageController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Models/AnimationModel.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Packet.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/HealthController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/DamageController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/AnimationController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Others/Delegates.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Packet.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Client.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/NetworkManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/ServerSend.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Server.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1wqns0dlUIBHibJRDq75cvY4ufM" />
@@ -99,10 +99,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="23100">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="23100" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -121,6 +121,7 @@
       <workItem from="1629195195732" duration="603000" />
       <workItem from="1629267046085" duration="4923000" />
       <workItem from="1629282583867" duration="32754000" />
+      <workItem from="1629439984645" duration="8687000" />
     </task>
     <servers />
   </component>
@@ -129,6 +130,17 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>

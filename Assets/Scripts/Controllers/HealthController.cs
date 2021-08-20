@@ -23,6 +23,10 @@ namespace Controllers
             }
         }
 
+        public bool CheckDeath()
+        {
+            return Health == 0;
+        }
         public void Initialize(float startHealth, float maxHealth)
         {
             SetMaxHealth(maxHealth);

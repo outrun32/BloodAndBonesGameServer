@@ -1,14 +1,18 @@
+using System.Collections;
 using Controllers;
 using Controllers.Character;
-using Controllers.Character.Attack;
+using Delegates;
 using Interfaces.Attack;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public event ReturnVoid DeathEvent;
+    public event ReturnPlayer DeathPlayerEvent;
     private int _id;
     private string _username;
     private bool _isBlocking;
+    private bool _isDeath;
     [Header("Controllers")]
     protected MovementController _movementController;
     private AnimationController _animationController;
@@ -67,6 +71,7 @@ public class Player : MonoBehaviour
         
         _attackController.NStart();
         _movementController.SetCanMove(true);
+        OnEnableN();
     }
 
     public void FixedUpdate()
@@ -103,7 +108,7 @@ public class Player : MonoBehaviour
         return _animationController.GetAnimationModel();
     }
 
-    public void EndAttack(bool value)
+    public void EndAttack()
     {
         _movementController.SetCanMove(true);
         _attackController.EndAttack();
@@ -112,5 +117,30 @@ public class Player : MonoBehaviour
     public void Damage()
     {
         _animationController.Damage(2);
+        _isDeath = _damageController.CheckDeath();
+        if (_isDeath)
+        {
+            _animationController.Death();
+            StartCoroutine(WaitDeath());
+            ServerSend.PlayerDeath(this);
+        }
+    }
+    public void OnEnableN()
+    {
+        DeathEvent += OnDisableN;
+    }
+
+    public void OnDisableN()
+    {
+        _damageController.Damage -= Damage;
+        _animationController.StopAttackEvent -= EndAttack;
+        DeathEvent -= OnDisableN;
+
+    }
+    public IEnumerator WaitDeath()
+    {
+        yield return new WaitForSeconds(3);
+        DeathEvent?.Invoke();
+        DeathPlayerEvent?.Invoke(this);
     }
 }

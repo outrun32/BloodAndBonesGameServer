@@ -13,7 +13,8 @@ public enum ServerPackets
     playerRotation,
     playerDisconnected,
     playerAnimataion,
-    playerInfo
+    playerInfo,
+    playerDeath
 }
 
 /// <summary>Sent from client to server.</summary>
@@ -214,6 +215,7 @@ public class Packet : IDisposable
         Write(value.IsSuperAttack);
         Write(value.IsBlock);
         Write(value.IsBlockImpact);
+        Write(value.IsDeath);
     }
     #endregion
 
