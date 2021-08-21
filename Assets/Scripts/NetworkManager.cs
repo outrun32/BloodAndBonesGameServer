@@ -6,6 +6,7 @@ public class NetworkManager : MonoBehaviour
 {
 
     public static NetworkManager instance;
+    [SerializeField]private int _port = 26950;
 
     public Player playerPrefab;
 
@@ -26,7 +27,7 @@ public class NetworkManager : MonoBehaviour
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
-        Server.Start(10, 26950);
+        Server.Start(10, _port);
     }
 
     private void OnApplicationQuit()

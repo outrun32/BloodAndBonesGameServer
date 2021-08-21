@@ -2414,8 +2414,9 @@ MonoBehaviour:
   _manaController: {fileID: 8629069603906687142}
   _characterController: {fileID: 8894960456130640444}
   _moveSpeed: 5
+  _moveAccelerate: 0.07
   _gravity: -9.81
-  _jumpHeight: 2
+  _jumpHeight: 0.5
   _maxHealth: 100
   _startHealth: 100
   _maxMana: 100

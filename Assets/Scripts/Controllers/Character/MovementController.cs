@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Controllers.Character
@@ -7,6 +8,7 @@ namespace Controllers.Character
         private CharacterController _characterController;
 
         private float _moveSpeed;
+        private float _speed;
         private float _gravity = Physics.gravity.y;
         private float _jumpHeight;
 
@@ -16,13 +18,15 @@ namespace Controllers.Character
         private bool _isJumping;
 
         private Vector3 _playerVelocity;
+        private Vector3 _direction;
+        private Vector2 _inputDirection;
         bool _isGrounded;
 
         private Vector2 _inputs;
         private bool _canMove;
         private bool _moveUntil;
 
-        public MovementController(CharacterController characterController, float moveSpeed, float jumpHeight, Transform transform)
+        public MovementController(CharacterController characterController, float moveSpeed, float jumpHeight,  Transform transform)
         {
             this._characterController = characterController;
             this._moveSpeed = moveSpeed;
@@ -51,14 +55,15 @@ namespace Controllers.Character
             }
             _isGrounded = _characterController.isGrounded;
         }
-        private void Move(Vector2 _inputDirection)
+        private void Move(Vector2 inputDirection)
         {
-            Vector3 direction = ((_transform.forward * _inputDirection.y + _transform.right * _inputDirection.x) * _moveSpeed) * Time.fixedDeltaTime;
+            _inputDirection = inputDirection;
+            _direction =  _transform.forward * _inputDirection.y + _transform.right * _inputDirection.x;
             if (_isGrounded)
             {
-                _groundDirection = direction;
+                _groundDirection = _direction;
             }
-            _characterController.Move(_groundDirection);
+            _characterController.Move(_groundDirection  * _moveSpeed * Time.fixedDeltaTime);
         }
         public void Jump()
         {
@@ -89,11 +94,17 @@ namespace Controllers.Character
         {
             _moveUntil = true;
         }
-
         public void StopMoveUntil()
         {
             _moveUntil = false;
         }
+
+        public IEnumerator StopMoveUntilByTime(float time)
+        {
+            yield return new WaitForSeconds(time);
+            StopMoveUntil();
+        }
+        
     }
     
 }

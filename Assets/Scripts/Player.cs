@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     private string _username;
     private bool _isBlocking;
     private bool _isDeath;
+    private float _speed;
+    private Vector2 _inputDirection;
     [Header("Controllers")]
     protected MovementController _movementController;
     private AnimationController _animationController;
@@ -24,6 +26,7 @@ public class Player : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private float _moveSpeed;
+    [SerializeField] [Range(0,1f)]private float _moveAccelerate;
     [SerializeField] private float _gravity = Physics.gravity.y;
     [SerializeField] private float _jumpHeight;
     [Header("Health")] 
@@ -49,6 +52,10 @@ public class Player : MonoBehaviour
         get => _isBlocking;
         set
         {
+            if (value != _isBlocking)
+            {
+                _movementController.SetCanMove(!value);
+            }
             _damageController.SetDamageState(value);
             _isBlocking = value;
         }
@@ -87,16 +94,22 @@ public class Player : MonoBehaviour
         ServerSend.PlayerRotation(this);
         ServerSend.PlayerAnimation(this);
         ServerSend.PlayerInfo(this);
-    }
+    }       
     public void SetInput(InputModel inputModel)
     {
+        _inputDirection = Vector2.Lerp(_inputDirection, inputModel.JoystickAxis, _moveAccelerate);
+        inputModel.JoystickAxis = _inputDirection;
         _movementController.SetInput(inputModel);
         _animationController.Update(inputModel);
         if (inputModel.IsAttacking)
         {
             _movementController.SetCanMove(false);
             Debug.Log(GetAnimationModel().AttackInd);
-            if (GetAnimationModel().AttackInd == 4) _movementController.MoveUntil();
+            if (GetAnimationModel().AttackInd == 4)
+            {
+                _movementController.MoveUntil();
+                StartCoroutine(_movementController.StopMoveUntilByTime(1));
+            }
             _attackController.SetAttack(GetAnimationModel().AttackInd);
             _attackController.Attack(10);
         }

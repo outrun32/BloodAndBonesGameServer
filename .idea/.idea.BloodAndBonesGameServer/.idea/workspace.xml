@@ -52,19 +52,19 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/Attack/MeleeAttackController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/PKSP.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/MeleePlayerController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/MovementController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/AtackSTB.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Models/AnimationModel.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/HealthController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/DamageController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/AnimationController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Others/Delegates.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Packet.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Client.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/NetworkManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/ServerSend.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Server.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Animation/AtackSTB.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/AnimationController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/MovementController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/NetworkManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1wqns0dlUIBHibJRDq75cvY4ufM" />
@@ -121,7 +121,7 @@
       <workItem from="1629195195732" duration="603000" />
       <workItem from="1629267046085" duration="4923000" />
       <workItem from="1629282583867" duration="32754000" />
-      <workItem from="1629439984645" duration="8687000" />
+      <workItem from="1629439984645" duration="20980000" />
     </task>
     <servers />
   </component>

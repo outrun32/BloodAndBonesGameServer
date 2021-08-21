@@ -5,6 +5,7 @@ namespace Controllers.Character
 {
     public class AnimationController
     {
+        [SerializeField] private int MaxIndAttack = 0;
         public ReturnVoid StopAttackEvent;
         private bool _isAttacking = false;
         private Animator _animator;
@@ -20,11 +21,25 @@ namespace Controllers.Character
             _animator.SetFloat("SpeedY", inputModel.JoystickAxis.y);
             _animator.SetFloat("Speed", inputModel.JoystickAxis.magnitude);
             _animator.SetBool("Jump", inputModel.IsJumping);
-            _animator.SetBool("Attack", inputModel.IsAttacking);
+            if (!_animator.GetBool("StartAttack"))
+            {
+                if (inputModel.IsAttacking)
+                {
+                    _animator.SetInteger("AttackInd",
+                        _animator.GetFloat("SpeedY") <= 0.6f ? Random.Range(0, MaxIndAttack) : 4);
+                    _animator.SetBool("Attack", inputModel.IsAttacking);
+                }
+                else _animator.SetBool("Attack", inputModel.IsAttacking);
+            }
+            
             _animator.SetBool("SuperAttack", inputModel.IsSuperAtacking);
             _animator.SetBool("Block", inputModel.IsBlocking);
         }
 
+        public float GetSpeedValue(Vector2 axis)
+        {
+            return Mathf.Sqrt(axis.x*axis.x + axis.y * axis.y);
+        }
         public AnimationModel GetAnimationModel()
         {
             if (_isAttacking)
