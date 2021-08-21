@@ -61,9 +61,9 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/ServerSend.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Server.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Animation/AtackSTB.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/AnimationController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/MovementController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/NetworkManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/AnimationController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
     </changedPaths>
   </component>
@@ -121,7 +121,7 @@
       <workItem from="1629195195732" duration="603000" />
       <workItem from="1629267046085" duration="4923000" />
       <workItem from="1629282583867" duration="32754000" />
-      <workItem from="1629439984645" duration="20980000" />
+      <workItem from="1629439984645" duration="22308000" />
     </task>
     <servers />
   </component>

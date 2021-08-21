@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     private AnimationController _animationController;
     protected IAttack _attackController;
     
+    
     [SerializeField] private DamageController _damageController;
     [SerializeField] private ManaController _manaController;
     
@@ -37,6 +38,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _startMana;
     [Header("Animation")] 
     [SerializeField] private Animator _animator;
+    [SerializeField] private int _maxIndAttack = 0;
 
     public int ID => _id;
     public string Username => _username;
@@ -68,7 +70,7 @@ public class Player : MonoBehaviour
         _damageController.Initialize(_startHealth, _maxHealth);
         _damageController.Damage += Damage;
         _manaController.Initialize(_startMana, _maxMana);
-        _animationController = new AnimationController(_animator);
+        _animationController = new AnimationController(_animator, _maxIndAttack);
         _animationController.StopAttackEvent += EndAttack;
     }
 

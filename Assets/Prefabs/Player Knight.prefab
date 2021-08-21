@@ -2422,6 +2422,7 @@ MonoBehaviour:
   _maxMana: 100
   _startMana: 100
   _animator: {fileID: 6207336397208688603}
+  _maxIndAttack: 4
   _meleeAttackController: {fileID: 6877136497482585597}
   _distanceTeleport: 2.8
 --- !u!1 &7495619775315526216

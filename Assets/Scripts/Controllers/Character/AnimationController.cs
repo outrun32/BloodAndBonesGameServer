@@ -5,14 +5,15 @@ namespace Controllers.Character
 {
     public class AnimationController
     {
-        [SerializeField] private int MaxIndAttack = 0;
+        private int _maxIndAttack = 0;
         public ReturnVoid StopAttackEvent;
         private bool _isAttacking = false;
         private Animator _animator;
 
-        public AnimationController(Animator animator)
+        public AnimationController(Animator animator, int maxIndAttack)
         {
             _animator = animator;
+            _maxIndAttack = maxIndAttack;
         }
 
         public void Update(InputModel inputModel)
@@ -26,7 +27,7 @@ namespace Controllers.Character
                 if (inputModel.IsAttacking)
                 {
                     _animator.SetInteger("AttackInd",
-                        _animator.GetFloat("SpeedY") <= 0.6f ? Random.Range(0, MaxIndAttack) : 4);
+                        _animator.GetFloat("SpeedY") <= 0.6f ? Random.Range(0, _maxIndAttack) : 4);
                     _animator.SetBool("Attack", inputModel.IsAttacking);
                 }
                 else _animator.SetBool("Attack", inputModel.IsAttacking);
