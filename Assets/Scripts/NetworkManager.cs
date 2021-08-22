@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PlayFab;
+using PlayFab.MultiplayerAgent.Model;
 
 public class NetworkManager : MonoBehaviour
 {
@@ -25,6 +27,12 @@ public class NetworkManager : MonoBehaviour
 
     private void Start()
     {
+
+        PlayFabMultiplayerAgentAPI.Start();
+        StartCoroutine(ReadyForPlayers());
+
+
+
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
         Server.Start(10, _port);
@@ -43,6 +51,13 @@ public class NetworkManager : MonoBehaviour
         Destroy(player.gameObject);
         
     }
+
+    private IEnumerator ReadyForPlayers()
+    {
+        yield return new WaitForSeconds(.5f);
+        PlayFabMultiplayerAgentAPI.ReadyForPlayers();
+    }
+
     public Player InstantiatePlayer()
     {
         Player instantiate = Instantiate(playerPrefab, new Vector3(Random.Range(-10f, 10f), 0, Random.Range(-10f, 10f)),
