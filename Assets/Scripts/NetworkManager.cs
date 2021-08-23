@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using PlayFab;
-using PlayFab.MultiplayerAgent.Model;
-
 public class NetworkManager : MonoBehaviour
 {
 
     public static NetworkManager instance;
+
     [SerializeField]private int _port = 26950;
 
     public Player playerPrefab;
@@ -28,11 +26,6 @@ public class NetworkManager : MonoBehaviour
     private void Start()
     {
 
-        PlayFabMultiplayerAgentAPI.Start();
-        StartCoroutine(ReadyForPlayers());
-
-
-
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
         Server.Start(10, _port);
@@ -50,12 +43,6 @@ public class NetworkManager : MonoBehaviour
         Server.clients[player.ID].Respawn(player.Username);
         Destroy(player.gameObject);
         
-    }
-
-    private IEnumerator ReadyForPlayers()
-    {
-        yield return new WaitForSeconds(.5f);
-        PlayFabMultiplayerAgentAPI.ReadyForPlayers();
     }
 
     public Player InstantiatePlayer()
