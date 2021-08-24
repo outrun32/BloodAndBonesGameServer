@@ -195,7 +195,6 @@ class Client
     {
         player = NetworkManager.instance.InstantiatePlayer();
         player.Initialize(id, _playerName);
-
         //отправляем информацию о всех игроках клиенту, чтобы они появились в его мире
         foreach (Client _client in Server.clients.Values)
         {

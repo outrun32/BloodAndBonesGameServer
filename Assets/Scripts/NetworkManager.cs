@@ -8,6 +8,8 @@ public class NetworkManager : MonoBehaviour
 
     [SerializeField]private int _port = 26950;
 
+    public int Port { get => _port;}
+
     public Player playerPrefab;
 
     private void Awake()
