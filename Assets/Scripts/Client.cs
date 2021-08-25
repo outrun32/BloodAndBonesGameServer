@@ -14,11 +14,18 @@ class Client
     public TCP tcp;
     public UDP udp;
 
+    private string playfabID;
+
     public Client(int _clientId)
     {
         id = _clientId;
         tcp = new TCP(id);
         udp = new UDP(id);
+    }
+
+    public void SetPlayFabID(string _id)
+    {
+        playfabID = _id;
     }
 
     public class TCP
@@ -249,6 +256,8 @@ class Client
 
         tcp.Disconnect();
         udp.Disconnect();
+
+        Server.OnPlayerRemoved.Invoke(playfabID);
 
         ServerSend.PlayerDisconnected(id);
     }
