@@ -28,6 +28,7 @@ class Server
         tcpListener.Start();
         tcpListener.BeginAcceptTcpClient(new AsyncCallback(TCPConnectCallback), null);
         udpListener = new UdpClient(Port);
+        udpListener.Client.IOControl((IOControlCode)Constants.SIO_UDP_CONNRESET, new byte[] { 0, 0, 0, 0 }, null);
         udpListener.BeginReceive(UDPReceiveCallback, null);
 
         Debug.Log($"Server started on port {Port}.");
@@ -55,7 +56,6 @@ class Server
     {
         try
         {
-            Debug.Log("UDPReceiveCallback");
             IPEndPoint _clientEndPoint = new IPEndPoint(IPAddress.Any, 0);
             byte[] _data = udpListener.EndReceive(_result, ref _clientEndPoint);
             udpListener.BeginReceive(UDPReceiveCallback, null);
@@ -64,7 +64,6 @@ class Server
             {
                 return;
             }
-
             using (Packet _packet = new Packet(_data))
             {
                 int _clientId = _packet.ReadInt();

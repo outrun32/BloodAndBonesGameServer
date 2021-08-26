@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
-
 public class NetworkManager : MonoBehaviour
 {
 
     public static NetworkManager instance;
+
     [SerializeField]private int _port = 26950;
 
     public Player playerPrefab;
@@ -27,6 +27,7 @@ public class NetworkManager : MonoBehaviour
 
     private void Start()
     {
+
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
         Server.Start(10, _port);
@@ -50,6 +51,7 @@ public class NetworkManager : MonoBehaviour
         Destroy(player.gameObject);
         
     }
+
     public Player InstantiatePlayer()
     {
         Player instantiate = Instantiate(playerPrefab, new Vector3(Random.Range(-10f, 10f), 0, Random.Range(-10f, 10f)),
