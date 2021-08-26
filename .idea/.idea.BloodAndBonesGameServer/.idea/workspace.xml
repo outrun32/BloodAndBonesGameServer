@@ -59,13 +59,13 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Others/Delegates.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/ServerSend.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Animation/AtackSTB.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/MovementController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/AnimationController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Server.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/NetworkManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Packet.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Client.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/MovementController.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1wqns0dlUIBHibJRDq75cvY4ufM" />
@@ -141,6 +141,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />

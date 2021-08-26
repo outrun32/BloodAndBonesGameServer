@@ -41,19 +41,25 @@ namespace Controllers.Character
         public void FixedUpdate()
         {
             Vector2 floatInput = _inputs;
-            if (_canMove)
-            {
-                Move(floatInput);
-                Jump();
-            }
-
+            Move(floatInput, _canMove);
             if (_moveUntil)
             {
                 Debug.Log("_moveUntil");
                 Move(Vector2.up);
-                Jump();
             }
+            Jump();
             _isGrounded = _characterController.isGrounded;
+        }
+        private void Move(Vector2 inputDirection, bool isCanMove)
+        {
+            _inputDirection = inputDirection;
+            if (isCanMove) _direction =  _transform.forward * _inputDirection.y + _transform.right * _inputDirection.x;
+            else _direction = Vector3.zero;
+            if (_isGrounded)
+            {
+                _groundDirection = _direction;
+            }
+            _characterController.Move(_groundDirection  * _moveSpeed * Time.fixedDeltaTime);
         }
         private void Move(Vector2 inputDirection)
         {
@@ -72,7 +78,7 @@ namespace Controllers.Character
             {
                 _playerVelocity.y = 0f;
             }
-            if (_isGrounded && _isJumping)
+            if (_isGrounded && _isJumping && _canMove)
             {
                 _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * _gravity);
             }
