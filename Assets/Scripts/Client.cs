@@ -5,7 +5,7 @@ using System.Net;
 using System;
 using System.Net.Sockets;
 
-class Client
+public class Client
 {
     public static int dataBufferSize = 4096;
 
@@ -74,9 +74,9 @@ class Client
                 if (_byteLength <= 0)
                 {
                     Server.clients[id].Disconnect();
+                    Debug.Log("Dispoze Disconnect");
                     return;
-                }
-
+                }   
                 byte[] _data = new byte[_byteLength];
                 Array.Copy(receiveBuffer, _data, _byteLength);
                 receivedData.Reset(HandleData(_data));

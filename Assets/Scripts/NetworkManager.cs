@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class NetworkManager : MonoBehaviour
 {
@@ -9,7 +11,7 @@ public class NetworkManager : MonoBehaviour
     [SerializeField]private int _port = 26950;
 
     public Player playerPrefab;
-
+    //public static Dictionary<int, Client> clients = new Dictionary<int, Client>();
     private void Awake()
     {
         if (instance == null)
@@ -28,6 +30,11 @@ public class NetworkManager : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
         Server.Start(10, _port);
+    }
+
+    private void FixedUpdate()
+    {
+        Debug.Log(Server.clients.Count); 
     }
 
     private void OnApplicationQuit()
