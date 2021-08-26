@@ -10,6 +10,8 @@ public class NetworkManager : MonoBehaviour
 
     [SerializeField]private int _port = 26950;
 
+    public int Port { get => _port;}
+
     public Player playerPrefab;
     //public static Dictionary<int, Client> clients = new Dictionary<int, Client>();
     private void Awake()

@@ -9,7 +9,9 @@ public class PlayfabAgentListener : MonoBehaviour
 {
 
     private List<ConnectedPlayer> _connectedPlayers;
+
     public bool Debugging = true;
+
 
     void Start()
     {
@@ -20,12 +22,15 @@ public class PlayfabAgentListener : MonoBehaviour
         PlayFabMultiplayerAgentAPI.OnShutDownCallback += OnShutDown;
         PlayFabMultiplayerAgentAPI.OnAgentErrorCallback += OnAgentError;
 
+        Server.OnPlayerAdded.AddListener(OnPlayerAdded);
+        Server.OnPlayerRemoved.AddListener(OnPlayerRemoved);
+
         StartCoroutine(ReadyForPlayers());
     }
 
     private void OnServerActive()
     {
-        Server.Start(10, 26950);
+        Server.Start(10, NetworkManager.instance.Port);
     }
 
     private void OnShutDown()
@@ -38,14 +43,17 @@ public class PlayfabAgentListener : MonoBehaviour
         Debug.Log(error);
     }
 
-    private void OnPlayerRemoved()
+    private void OnPlayerRemoved(string playfabId)
     {
-
+        ConnectedPlayer player = _connectedPlayers.Find(x => x.PlayerId.Equals(playfabId, System.StringComparison.OrdinalIgnoreCase));
+        _connectedPlayers.Remove(player);
+        PlayFabMultiplayerAgentAPI.UpdateConnectedPlayers(_connectedPlayers);
     }
 
-    private void OnPlayerAdded()
+    private void OnPlayerAdded(string playfabId)
     {
-
+        _connectedPlayers.Add(new ConnectedPlayer(playfabId));
+        PlayFabMultiplayerAgentAPI.UpdateConnectedPlayers(_connectedPlayers);
     }
 
     private IEnumerator ReadyForPlayers()

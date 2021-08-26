@@ -14,11 +14,18 @@ public class Client
     public TCP tcp;
     public UDP udp;
 
+    private string playfabID;
+
     public Client(int _clientId)
     {
         id = _clientId;
         tcp = new TCP(id);
         udp = new UDP(id);
+    }
+
+    public void SetPlayFabID(string _id)
+    {
+        playfabID = _id;
     }
 
     public class TCP
@@ -195,7 +202,6 @@ public class Client
     {
         player = NetworkManager.instance.InstantiatePlayer();
         player.Initialize(id, _playerName);
-
         //отправляем информацию о всех игроках клиенту, чтобы они появились в его мире
         foreach (Client _client in Server.clients.Values)
         {
@@ -250,6 +256,8 @@ public class Client
 
         tcp.Disconnect();
         udp.Disconnect();
+
+        Server.OnPlayerRemoved.Invoke(playfabID);
 
         ServerSend.PlayerDisconnected(id);
     }

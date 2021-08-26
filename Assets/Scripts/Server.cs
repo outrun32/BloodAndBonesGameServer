@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Net;
 using System.Net.Sockets;
+using UnityEngine.Events;
 
 class Server
 {
@@ -13,13 +14,19 @@ class Server
     public delegate void PacketHandler(int _fromClient, Packet _packet);
     public static Dictionary<int, PacketHandler> packetHandlers;
 
+
+
     private static TcpListener tcpListener;
     private static UdpClient udpListener;
 
-    public static void Start(int _maxPlayers, int _port)
+    public static PlayerEvent OnPlayerAdded = new PlayerEvent();
+    public static PlayerEvent OnPlayerRemoved = new PlayerEvent();
+
+    public class PlayerEvent : UnityEvent<string> {}
+
+    public static void Start(int _maxPlayers)
     {
         MaxPlayers = _maxPlayers;
-        Port = _port;
 
         Debug.Log("Starting Server...");
         InitializeServerData();
@@ -32,6 +39,17 @@ class Server
         udpListener.BeginReceive(UDPReceiveCallback, null);
 
         Debug.Log($"Server started on port {Port}.");
+    }
+
+    public static void Start(int _maxPlayers, int _port)
+    {
+        SetPort(_port);
+        Start(_maxPlayers);
+    }
+
+    public static void SetPort(int _port)
+    {
+        Port = _port;
     }
 
     private static void TCPConnectCallback(IAsyncResult _result)
@@ -122,6 +140,11 @@ class Server
         };
 
         Debug.Log("Initialized packets");
+    }
+
+    public struct ReceiveAuthenticateMessage
+    {
+        public string PlayFabId;
     }
 
     public static void Stop()
