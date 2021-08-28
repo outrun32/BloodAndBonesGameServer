@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     private string _username;
     private bool _isBlocking;
     private bool _isDeath;
+    private bool _isStarted;
     private float _speed;
     private Vector2 _inputDirection;
     [Header("Controllers")]
@@ -48,7 +49,6 @@ public class Player : MonoBehaviour
     public float StartMana => _startMana;
     public float Health => _damageController.Health;
     public float Mana => _manaController.Mana;
-
     public bool IsBlocking
     {
         get => _isBlocking;
@@ -61,6 +61,11 @@ public class Player : MonoBehaviour
             _damageController.SetDamageState(value);
             _isBlocking = value;
         }
+    }
+
+    public void StartSession()
+    {
+        _isStarted = true;
     }
     public void Initialize(int id, string username)
     {
@@ -99,23 +104,28 @@ public class Player : MonoBehaviour
     }       
     public void SetInput(InputModel inputModel)
     {
-        _inputDirection = Vector2.Lerp(_inputDirection, inputModel.JoystickAxis, _moveAccelerate);
-        inputModel.JoystickAxis = _inputDirection;
-        _movementController.SetInput(inputModel);
-        _animationController.Update(inputModel);
-        if (inputModel.IsAttacking)
+        if (_isStarted)
         {
-            _movementController.SetCanMove(false);
-            Debug.Log(GetAnimationModel().AttackInd);
-            if (GetAnimationModel().AttackInd == 4)
+            _inputDirection = Vector2.Lerp(_inputDirection, inputModel.JoystickAxis, _moveAccelerate);
+            inputModel.JoystickAxis = _inputDirection;
+            _movementController.SetInput(inputModel);
+            _animationController.Update(inputModel);
+            if (inputModel.IsAttacking)
             {
-                _movementController.MoveUntil();
-                StartCoroutine(_movementController.StopMoveUntilByTime(1));
+                _movementController.SetCanMove(false);
+                Debug.Log(GetAnimationModel().AttackInd);
+                if (GetAnimationModel().AttackInd == 4)
+                {
+                    _movementController.MoveUntil();
+                    StartCoroutine(_movementController.StopMoveUntilByTime(1));
+                }
+
+                _attackController.SetAttack(GetAnimationModel().AttackInd);
+                _attackController.Attack(10);
             }
-            _attackController.SetAttack(GetAnimationModel().AttackInd);
-            _attackController.Attack(10);
+
+            IsBlocking = inputModel.IsBlocking;
         }
-        IsBlocking = inputModel.IsBlocking;
     }
 
     public AnimationModel GetAnimationModel()

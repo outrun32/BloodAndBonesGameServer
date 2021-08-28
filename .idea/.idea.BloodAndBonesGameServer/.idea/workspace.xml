@@ -22,6 +22,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Controllers/MeleePlayerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7E358363-73B7-4B12-BDE8-BA7FA4D53641/9d/fd5e026f/Socket.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PKSP.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Controllers/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Interfaces/Attack/IAttack.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Controllers/ManaController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Controllers/Character/Attack/MeleeAttackController.cs" root0="FORCE_HIGHLIGHTING" />
@@ -35,6 +36,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Controllers/Character/Attack/SwordController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AA976C21-0410-4B7C-A9E1-785715722C9D/fb/64c9cef1/Socket.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Models/InputModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Controllers/SpawnController.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
@@ -57,15 +59,17 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/HealthController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/DamageController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Others/Delegates.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/ServerSend.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Animation/AtackSTB.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/AnimationController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Server.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/NetworkManager.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Packet.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Client.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/MovementController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Packet.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/ServerSend.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/NetworkManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/SpawnController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/GameManager.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1wqns0dlUIBHibJRDq75cvY4ufM" />

@@ -12,9 +12,11 @@ public enum ServerPackets
     playerPosition,
     playerRotation,
     playerDisconnected,
-    playerAnimataion,
+    playerAnimation,
     playerInfo,
-    playerDeath
+    playerDeath,
+    setTimerCounter,
+    startSession
 }
 
 /// <summary>Sent from client to server.</summary>

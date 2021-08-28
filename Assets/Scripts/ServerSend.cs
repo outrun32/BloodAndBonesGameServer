@@ -119,11 +119,11 @@ public class ServerSend
     }
     public static void PlayerAnimation(Player _player)
     {
-        using (Packet _packet = new Packet((int)ServerPackets.playerAnimataion))
+        using (Packet _packet = new Packet((int)ServerPackets.playerAnimation))
         {
             _packet.Write(_player.ID);
             _packet.Write(_player.GetAnimationModel());
-            SendTCPDataToAll(_packet);
+            SendUDPDataToAll(_packet);
         }
     }
     public static void PlayerInfo(Player _player)
@@ -141,6 +141,23 @@ public class ServerSend
         using (Packet _packet = new Packet((int)ServerPackets.playerDeath))
         {
             _packet.Write(_player.ID);
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void SetCountTimer(int value)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.setTimerCounter))
+        {
+            _packet.Write(value);
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void StartSession()
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.startSession))
+        {
             SendTCPDataToAll(_packet);
         }
     }
