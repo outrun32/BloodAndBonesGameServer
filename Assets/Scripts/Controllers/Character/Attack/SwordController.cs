@@ -12,18 +12,17 @@ namespace Controllers.Character.Attack
         public Collider Collider;
         private void OnTriggerEnter(Collider other)
         {
-            //Debug.LogWarning(other.name);
+            Debug.LogWarning(other.name);
             foreach (string tag in tags)
             { 
                 if (other.gameObject.CompareTag(tag))
                 {
-                    //Debug.LogWarning("ATTACK PLAYER");
+                    Debug.LogWarning("ATTACK PLAYER");
                     ReturnObjectEvent?.Invoke(other.gameObject);
                 }
             }
         }
-
-         public void StartTracking()
+        public void StartTracking()
          {
              Collider.enabled = true;
          }

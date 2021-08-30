@@ -9,8 +9,14 @@ public class Client
 {
     public static int dataBufferSize = 4096;
 
+    public bool IsAutorized
+    {
+        get;
+        private set;
+    }
     public int id;
-    public Player player;
+    public string Username;
+    public Player Player;
     public TCP tcp;
     public UDP udp;
 
@@ -193,31 +199,65 @@ public class Client
         }
     }
 
+    public void SetUsername(string username)
+    {
+        IsAutorized = true;
+        Username = username;
+    }
 
     /// <summary>
     /// Метод для создания игрока и отправки его в игру
     /// </summary>
     /// <param name="_playerName">Имя игрока</param>
-    public void SendIntoGame(string _playerName)
+    public void SendIntoGame()
     {
-        player = NetworkManager.instance.InstantiatePlayer();
-        player.Initialize(id, _playerName);
+        Player = NetworkManager.instance.InstantiatePlayer();
+        Player.Initialize(id, Username);
         //отправляем информацию о всех игроках клиенту, чтобы они появились в его мире
         foreach (Client _client in Server.clients.Values)
         {
-            if (_client.player != null)
+            if (_client.Player != null)
             {
                 //Except ourselves
                 if (_client.id != id)
                 {
-                    ServerSend.SpawnPlayer(id, _client.player);
+                    ServerSend.SpawnPlayer(id, _client.Player);
                 }
             }
         }
         //аналогичное, но для клиента
         foreach (Client _client in Server.clients.Values)
         {
-            if (_client.player != null)
+            if (_client.Player != null)
+            {
+                ServerSend.SpawnPlayer(_client.id, Player);
+            }
+        }
+    }
+    /// <summary>
+    /// Метод для создания игрока и отправки его в игру
+    /// </summary>
+    /// <param name="_playerName">Имя игрока</param>
+    public void SendIntoGame(Player player)
+    {
+        Player = player;
+        Player.Initialize(id, Username);
+        //отправляем информацию о всех игроках клиенту, чтобы они появились в его мире
+        foreach (Client _client in Server.clients.Values)
+        {
+            if (_client.Player != null)
+            {
+                //Except ourselves
+                if (_client.id != id)
+                {
+                    ServerSend.SpawnPlayer(id, _client.Player);
+                }
+            }
+        }
+        //аналогичное, но для клиента
+        foreach (Client _client in Server.clients.Values)
+        {
+            if (_client.Player != null)
             {
                 ServerSend.SpawnPlayer(_client.id, player);
             }
@@ -228,16 +268,16 @@ public class Client
     /// Метод для создания игрока и отправки его в игру
     /// </summary>
     /// <param name="_playerName">Имя игрока</param>
-    public void Respawn(string _playerName)
+    public void Respawn()
     {
-        player = NetworkManager.instance.InstantiatePlayer();
-        player.Initialize(id, _playerName);
+        Player = NetworkManager.instance.InstantiatePlayer();
+        Player.Initialize(id, Username);
         //аналогичное, но для клиента
         foreach (Client _client in Server.clients.Values)
         {
-            if (_client.player != null)
+            if (_client.Player != null)
             {
-                ServerSend.SpawnPlayer(_client.id, player);
+                ServerSend.SpawnPlayer(_client.id, Player);
             }
         }
 
@@ -245,12 +285,13 @@ public class Client
 
     private void Disconnect()
     {
+        IsAutorized = false;
         Debug.Log($"{tcp.socket.Client.RemoteEndPoint} has disconnected");
 
         ThreadManager.ExecuteOnMainThread(() =>
         {
-            UnityEngine.Object.Destroy(player.gameObject);
-            player = null;
+            UnityEngine.Object.Destroy(Player.gameObject);
+            Player = null;
         });
 
 

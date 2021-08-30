@@ -8,17 +8,13 @@ namespace Controllers
         public void Respawn(Player player)
         {
             Debug.Log("RESPAWN");
-            player.DeathPlayerEvent -= Respawn;
-            Server.clients[player.ID].Respawn(player.Username);
+            Server.clients[player.ID].Respawn();
             Destroy(player.gameObject);
         
         }
-
-        public Player InstantiatePlayer()
+        public Player InstantiatePlayer(Transform spawnTransform)
         {
-            Player instantiate = Instantiate(playerPrefab, new Vector3(Random.Range(-10f, 10f), 0, Random.Range(-10f, 10f)),
-                Quaternion.identity);
-            instantiate.DeathPlayerEvent += Respawn;
+            Player instantiate = Instantiate(playerPrefab, spawnTransform.position, spawnTransform.rotation);
             return instantiate;
         }
     }

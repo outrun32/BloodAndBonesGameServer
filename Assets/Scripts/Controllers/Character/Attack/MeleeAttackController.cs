@@ -7,6 +7,7 @@ namespace Controllers.Character.Attack
 {
     public class MeleeAttackController : MonoBehaviour, IAttack
     {
+        [SerializeField] private Character _character;
         [SerializeField] private List<SwordController> _swordControllers;
         
         private List<GameObject> _objects = new List<GameObject>();
@@ -23,6 +24,7 @@ namespace Controllers.Character.Attack
 
         public void SetAttack(int index)
         {
+            Debug.Log($"ATTACK {index}");
             for (int i = 0; i < _swordControllers.Count; i++)
             {
                 SwordController swordController = _swordControllers[i];
@@ -46,15 +48,17 @@ namespace Controllers.Character.Attack
         }
         private void SetDamage(GameObject target)
         {
-            //Debug.LogWarning("SetDamage");
+            Debug.LogWarning("SetDamage");
             if (_isAttack && target != this.gameObject)
             {
-                //Debug.LogWarning("Check");
+                Debug.LogWarning("Check");
                 if (!_objects.Contains(target))
                 {
-                    //Debug.LogWarning("Damage PLAYER");
+                    Debug.LogWarning("Damage PLAYER");
                     _objects.Add(target);
-                    target.SendMessage("AddDamage", _damage);
+                    //target.SendMessage("AddDamage", _damage);
+                    target.GetComponent<DamageController>().AddDamage(_damage, DamageType.Character, _character);
+                    //target.SendMessage("AddDamage", (_damage, DamageType.Character, _character));
                 }
             }
         }

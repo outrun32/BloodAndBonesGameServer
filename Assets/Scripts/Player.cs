@@ -5,51 +5,20 @@ using Delegates;
 using Interfaces.Attack;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Character
 {
-    public event ReturnVoid DeathEvent;
+    private event ReturnVoid DeathEvent;
     public event ReturnPlayer DeathPlayerEvent;
-    private int _id;
-    private string _username;
-    private bool _isBlocking;
-    private bool _isDeath;
-    private bool _isStarted;
-    private float _speed;
-    private Vector2 _inputDirection;
+    [Header("Player Settings")]
     [Header("Controllers")]
     protected MovementController _movementController;
-    private AnimationController _animationController;
-    protected IAttack _attackController;
-    
-    
-    [SerializeField] private DamageController _damageController;
-    [SerializeField] private ManaController _manaController;
-    
     [Header("Movement")]
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private float _moveSpeed;
     [SerializeField] [Range(0,1f)]private float _moveAccelerate;
     [SerializeField] private float _gravity = Physics.gravity.y;
     [SerializeField] private float _jumpHeight;
-    [Header("Health")] 
-    [SerializeField] private float _maxHealth;
-    [SerializeField] private float _startHealth;
-    [Header("Mana")] 
-    [SerializeField] private float _maxMana;
-    [SerializeField] private float _startMana;
-    [Header("Animation")] 
-    [SerializeField] private Animator _animator;
-    [SerializeField] private int _maxIndAttack = 0;
-
-    public int ID => _id;
-    public string Username => _username;
-    public float MAXHealth => _maxHealth;
-    public float StartHealth => _startHealth;
-    public float MAXMana => _maxMana;
-    public float StartMana => _startMana;
-    public float Health => _damageController.Health;
-    public float Mana => _manaController.Mana;
-    public bool IsBlocking
+    public override bool IsBlocking 
     {
         get => _isBlocking;
         set
@@ -67,24 +36,19 @@ public class Player : MonoBehaviour
     {
         _isStarted = true;
     }
-    public void Initialize(int id, string username)
+    public override void Initialize(int id, string username)
     {
-        _id = id;
-        _username = username;
+        base.Initialize(id, username);
+        Debug.Log(username);
         _movementController = new MovementController(_characterController, _moveSpeed, _jumpHeight, this.transform);
-        _damageController.Initialize(_startHealth, _maxHealth);
-        _damageController.Damage += Damage;
-        _manaController.Initialize(_startMana, _maxMana);
-        _animationController = new AnimationController(_animator, _maxIndAttack);
-        _animationController.StopAttackEvent += EndAttack;
     }
 
     public virtual void Start()
     {
+        base.StartN();
         _movementController.Start();
-        
-        _attackController.NStart();
         _movementController.SetCanMove(true);
+
         OnEnableN();
     }
 
@@ -113,13 +77,12 @@ public class Player : MonoBehaviour
             if (inputModel.IsAttacking)
             {
                 _movementController.SetCanMove(false);
-                Debug.Log(GetAnimationModel().AttackInd);
                 if (GetAnimationModel().AttackInd == 4)
                 {
                     _movementController.MoveUntil();
                     StartCoroutine(_movementController.StopMoveUntilByTime(1));
                 }
-
+                Debug.Log(GetAnimationModel().AttackInd);
                 _attackController.SetAttack(GetAnimationModel().AttackInd);
                 _attackController.Attack(10);
             }
@@ -133,7 +96,7 @@ public class Player : MonoBehaviour
         return _animationController.GetAnimationModel();
     }
 
-    public void EndAttack()
+    private void EndAttack()
     {
         _movementController.SetCanMove(true);
         _attackController.EndAttack();
@@ -150,16 +113,28 @@ public class Player : MonoBehaviour
             ServerSend.PlayerDeath(this);
         }
     }
-    public void OnEnableN()
+    public void Damage(float value, DamageType damageType)
     {
-        DeathEvent += OnDisableN;
+        Damage();
+    }
+    public void Damage(float value, DamageType damageType, Character character)
+    {
+        Damage();
+    }
+    public override void OnEnableN()
+    {
+        base.OnEnableN();
+        _damageController.DamageCharacterEvent += Damage;
+        _damageController.DamageEvent += Damage;
+        _animationController.StopAttackEvent += EndAttack;
     }
 
-    public void OnDisableN()
+    public override void OnDisableN()
     {
-        _damageController.Damage -= Damage;
+        base.OnDisableN();
+        _damageController.DamageEvent -= Damage;
+        _damageController.DamageCharacterEvent -= Damage;
         _animationController.StopAttackEvent -= EndAttack;
-        DeathEvent -= OnDisableN;
 
     }
     public IEnumerator WaitDeath()

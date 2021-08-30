@@ -2392,6 +2392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b8c828dfac2c604a9c2b460706ab678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _character: {fileID: 91771490951919401}
   _swordControllers:
   - {fileID: 3729320733085678466}
   - {fileID: 3283779185357326099}
@@ -2412,17 +2413,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageController: {fileID: 8655192236289928054}
   _manaController: {fileID: 8629069603906687142}
-  _characterController: {fileID: 8894960456130640444}
-  _moveSpeed: 5
-  _moveAccelerate: 0.07
-  _gravity: -9.81
-  _jumpHeight: 0.5
   _maxHealth: 100
   _startHealth: 100
   _maxMana: 100
   _startMana: 100
   _animator: {fileID: 6207336397208688603}
   _maxIndAttack: 4
+  _characterController: {fileID: 8894960456130640444}
+  _moveSpeed: 5
+  _moveAccelerate: 0.07
+  _gravity: -9.81
+  _jumpHeight: 0.5
   _meleeAttackController: {fileID: 6877136497482585597}
   _distanceTeleport: 2.8
 --- !u!1 &7495619775315526216

@@ -11,6 +11,7 @@ public class ServerHandle
         string playfabID = _packet.ReadString();
         Debug.Log(playfabID);
         Server.OnPlayerAdded.Invoke(playfabID);
+        Server.clients[_fromClient].SetUsername(_username);
         Server.clients[_fromClient].SetPlayFabID(playfabID);
         Debug.Log($"{ Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint} connected succesfully and is now player {_fromClient} with nickname {_username}.");
 
@@ -18,12 +19,11 @@ public class ServerHandle
         {
             Debug.Log($"Player \"{_username}\"(ID : {_fromClient}) has assumed the wrong client ID ({_clientIdCheck})!");
         }
-        Server.clients[_fromClient].SendIntoGame(_username);
     }
 
     public static void PlayerInput(int fromClient, Packet packet)
     {
-        Server.clients[fromClient].player.SetInput(packet.ReadInputModel());
+        Server.clients[fromClient].Player.SetInput(packet.ReadInputModel());
     }
     
 }
