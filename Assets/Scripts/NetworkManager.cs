@@ -5,6 +5,8 @@ public class NetworkManager : MonoBehaviour
     public static NetworkManager instance;
     [SerializeField] private int _port = 26950;
 
+    public bool startServerInNManager = false;
+
     public int Port { get => _port;}
     private void Awake()
     {
@@ -22,9 +24,8 @@ public class NetworkManager : MonoBehaviour
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
-#if  UNITY_EDITOR
-        Server.Start(10, _port);
-#endif
+        if (startServerInNManager)
+            Server.Start(10, _port);
     }
     private void OnApplicationQuit()
     {

@@ -44,7 +44,7 @@ namespace Controllers.Character
             Move(floatInput, _canMove);
             if (_moveUntil)
             {
-                Debug.Log("_moveUntil");
+                //Debug.Log("_moveUntil");
                 Move(Vector2.up);
             }
             Jump();
