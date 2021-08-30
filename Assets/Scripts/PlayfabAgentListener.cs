@@ -30,7 +30,8 @@ public class PlayfabAgentListener : MonoBehaviour
 
     private void OnServerActive()
     {
-        Server.Start(10, NetworkManager.instance.Port);
+        if (!NetworkManager.instance.startServerInNManager)
+            Server.Start(10, NetworkManager.instance.Port);
     }
 
     private void OnShutDown()

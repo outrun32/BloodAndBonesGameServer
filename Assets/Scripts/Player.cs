@@ -106,7 +106,7 @@ public class Player : MonoBehaviour
         if (inputModel.IsAttacking)
         {
             _movementController.SetCanMove(false);
-            Debug.Log(GetAnimationModel().AttackInd);
+            //Debug.Log(GetAnimationModel().AttackInd);
             if (GetAnimationModel().AttackInd == 4)
             {
                 _movementController.MoveUntil();

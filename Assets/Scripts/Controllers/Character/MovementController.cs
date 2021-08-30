@@ -49,7 +49,7 @@ namespace Controllers.Character
 
             if (_moveUntil)
             {
-                Debug.Log("_moveUntil");
+                //Debug.Log("_moveUntil");
                 Move(Vector2.up);
                 Jump();
             }

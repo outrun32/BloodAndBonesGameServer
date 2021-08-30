@@ -8,6 +8,8 @@ public class NetworkManager : MonoBehaviour
 
     [SerializeField]private int _port = 26950;
 
+    public bool startServerInNManager = false;
+
     public int Port { get => _port;}
 
     public Player playerPrefab;
@@ -30,9 +32,18 @@ public class NetworkManager : MonoBehaviour
 
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
-        Server.Start(10, _port);
+        if (startServerInNManager)
+            Server.Start(10, _port);
     }
 
+<<<<<<< Updated upstream
+=======
+    private void FixedUpdate()
+    {
+        //Debug.Log(Server.clients.Count); 
+    }
+
+>>>>>>> Stashed changes
     private void OnApplicationQuit()
     {
         Server.Stop();
