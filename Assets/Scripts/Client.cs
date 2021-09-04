@@ -268,9 +268,9 @@ public class Client
     /// Метод для создания игрока и отправки его в игру
     /// </summary>
     /// <param name="_playerName">Имя игрока</param>
-    public void Respawn()
+    public void Respawn(Player player)
     {
-        Player = NetworkManager.instance.InstantiatePlayer();
+        Player = player;
         Player.Initialize(id, Username);
         //аналогичное, но для клиента
         foreach (Client _client in Server.clients.Values)

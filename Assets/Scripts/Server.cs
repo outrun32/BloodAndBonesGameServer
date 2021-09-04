@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Net;
 using System.Net.Sockets;
+using Delegates;
 using UnityEngine.Events;
 
 class Server
@@ -18,7 +19,7 @@ class Server
 
     private static TcpListener tcpListener;
     private static UdpClient udpListener;
-
+    public static ReturnClient OnClientAdded;
     public static PlayerEvent OnPlayerAdded = new PlayerEvent();
     public static PlayerEvent OnPlayerRemoved = new PlayerEvent();
 

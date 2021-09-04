@@ -65,24 +65,25 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Models/AnimationModel.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/HealthController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Animation/AtackSTB.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/AnimationController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Server.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Packet.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/ServerSend.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Interfaces/ICharacter.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/MovementController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/CharacterController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Others/Delegates.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/NetworkManager.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/ServerHandle.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/GameManager.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/SpawnController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Client.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/Attack/SwordController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/DamageController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/Attack/MeleeAttackController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/Character.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/SpawnController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Client.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/AnimationController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Models/PlayerDataModel.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Others/Delegates.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Server.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/ServerHandle.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/GameManager.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1wqns0dlUIBHibJRDq75cvY4ufM" />
@@ -125,10 +126,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="20316">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="20316" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -149,7 +150,10 @@
       <workItem from="1629282583867" duration="32754000" />
       <workItem from="1629439984645" duration="28876000" />
       <workItem from="1630164479327" duration="20621000" />
-      <workItem from="1630322278933" duration="4124000" />
+      <workItem from="1630322278933" duration="11441000" />
+      <workItem from="1630745965047" duration="4047000" />
+      <workItem from="1630759260312" duration="57000" />
+      <workItem from="1630759390324" duration="659000" />
     </task>
     <servers />
   </component>
@@ -178,13 +182,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Server.cs</url>
-          <line>97</line>
+          <line>98</line>
           <properties documentPath="E:\Projects\GitHub\Server\BloodAndBonesGameServer\Assets\Scripts\Server.cs" initialLine="97" containingFunctionPresentation="method 'SendUDPData'">
             <startOffsets>
-              <option value="3195" />
+              <option value="3257" />
             </startOffsets>
             <endOffsets>
-              <option value="3196" />
+              <option value="3258" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="1" />

@@ -1,25 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Models;
 using UnityEngine;
 namespace Controllers
 {
     public class GameManager : MonoBehaviour
     {
+        private List<Client> _clients = new List<Client>();
+            
+            
         [SerializeField] private SpawnController _spawnController;
         [SerializeField] private float _preloadTime = 30;
-        [SerializeField] private Dictionary<string, Character.Character> _redTeam;
-        [SerializeField] private Dictionary<string, Character.Character> _blueTeam;
+        [SerializeField] private Dictionary<string,(PlayerDataModel, Character.Character)> _redTeam;
+        [SerializeField] private Dictionary<string,(PlayerDataModel, Character.Character)> _blueTeam;
+        [SerializeField] private Dictionary<string,bool> _teams = new Dictionary<string, bool>();
         [SerializeField] private Dictionary<Character.Character, Transform> _spawnTransforms;
         [SerializeField] private List<Transform> _spawnsRed;
         [SerializeField] private List<Transform> _spawnsBLue;
+        [SerializeField] private bool _isStartTime = true;
         // Start is called before the first frame update
         void Start()
         {
-            StartCoroutine(WaitStartTime());
+            Server.OnClientAdded += ClientAdded;
+            if (_isStartTime) StartCoroutine(WaitStartTime());
             _spawnTransforms = new Dictionary<Character.Character, Transform>();
-            _redTeam = new Dictionary<string, Character.Character>();
-            _blueTeam = new Dictionary<string, Character.Character>();
+            _redTeam = new Dictionary<string,(PlayerDataModel, Character.Character)>();
+            _blueTeam = new Dictionary<string,(PlayerDataModel, Character.Character)>();
         }
 
         // Update is called once per frame
@@ -31,40 +38,73 @@ namespace Controllers
             }
         }
 
+        (PlayerDataModel, Character.Character) GetPlayerData(string username)
+        {
+            return _teams[username] ? _redTeam[username] : _blueTeam[username];
+        }
         private void Death(Character.Character characterStriker, Character.Character characterDeath)
         {
-            Respawn(characterDeath);
+            GetPlayerData(characterStriker.Username).Item1.KillCount++;
+            GetPlayerData(characterDeath.Username).Item1.DeathCount++;
             Debug.Log($"User  {characterStriker.Username} kill {characterDeath.Username}");
         }
-        private void Respawn(Character.Character client)
+        private void Respawn(Player character)  
         {
+            character.DeathCharacter -= Death;
+            character.DeathPlayerEvent -= Respawn;
             
+            Player player = _spawnController.InstantiatePlayer(_spawnTransforms[character]);
+            _spawnTransforms.Add(player, _spawnTransforms[character]);
+            _spawnTransforms.Remove(character);
+            Server.clients[character.ID].Respawn(player);
+            _spawnController.Respawn(character);
+            
+            player.DeathCharacter += Death;
+            player.DeathPlayerEvent += Respawn;
+            player.StartSession();
         }
+
         private void SpawnPlayers()
         {
             bool isRed = false;
             int indexSpawn = -1;
-            Player player;
-            List<Client> clients = Server.clients.Select(c => c.Value).Where(c => c.IsAutorized).ToList();
-            foreach (Client client in clients)
+            foreach (Client client in _clients)
             {
                 isRed = !isRed;
-                if (isRed)
-                {
-                    indexSpawn++;
-                    player = _spawnController.InstantiatePlayer(_spawnsRed[indexSpawn]);
-                    _spawnTransforms.Add(player,_spawnsRed[indexSpawn]);
-                    _redTeam.Add(client.Username, player);
-                }
-                else
-                {
-                    player = _spawnController.InstantiatePlayer(_spawnsBLue[indexSpawn]); 
-                    _spawnTransforms.Add(player,_spawnsBLue[indexSpawn]);
-                    _blueTeam.Add(client.Username, player);
-                }
+                SpawnPlayer(isRed, indexSpawn, client);
+            }
+        }
 
-                player.DeathCharacter += Death;
-                client.SendIntoGame(player);
+        private void SpawnPlayer(bool isRed, int indexSpawn, Client client)
+        {
+            Player player;
+            if (isRed)
+            {
+                indexSpawn++;
+                player = _spawnController.InstantiatePlayer(_spawnsRed[indexSpawn]);
+                _teams.Add(client.Username,true);
+                _spawnTransforms.Add(player,_spawnsRed[indexSpawn]);
+                _redTeam.Add(client.Username, (new PlayerDataModel(client.Username, client.id,0,0,0), player));
+            }
+            else
+            {
+                player = _spawnController.InstantiatePlayer(_spawnsBLue[indexSpawn]); 
+                _teams.Add(client.Username,false);
+                _spawnTransforms.Add(player,_spawnsBLue[indexSpawn]);
+                _blueTeam.Add(client.Username,(new PlayerDataModel(client.Username, client.id,0,0,0), player));
+            }
+
+            player.DeathCharacter += Death;
+            player.DeathPlayerEvent += Respawn;
+            client.SendIntoGame(player);
+        }
+        public void ClientAdded(Client client)
+        {
+            _clients.Add(client);
+            if (!_isStartTime)
+            {
+                SpawnPlayer(true, Random.Range(0, 4), client);
+                client.Player.StartSession();
             }
         }
         IEnumerator WaitStartTime()

@@ -11,8 +11,10 @@ public class ServerHandle
         string playfabID = _packet.ReadString();
         Debug.Log(playfabID);
         Server.OnPlayerAdded.Invoke(playfabID);
+        
         Server.clients[_fromClient].SetUsername(_username);
         Server.clients[_fromClient].SetPlayFabID(playfabID);
+        Server.OnClientAdded.Invoke(Server.clients[_fromClient]);
         Debug.Log($"{ Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint} connected succesfully and is now player {_fromClient} with nickname {_username}.");
 
         if (_fromClient != _clientIdCheck)

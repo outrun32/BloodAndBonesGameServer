@@ -30,9 +30,9 @@ namespace Controllers.Character
                         _animator.GetFloat("SpeedY") <= 0.6f ? Random.Range(0, _maxIndAttack) : 4);
                     _animator.SetBool("Attack", inputModel.IsAttacking);
                 }
-                else _animator.SetBool("Attack", inputModel.IsAttacking);
+                
             }
-            
+            else _animator.SetBool("Attack", inputModel.IsAttacking);
             _animator.SetBool("SuperAttack", inputModel.IsSuperAtacking);
             _animator.SetBool("Block", inputModel.IsBlocking);
         }

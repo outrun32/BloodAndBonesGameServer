@@ -44,7 +44,7 @@ public class Player : Character
     }
 
     public virtual void Start()
-    {
+    {   
         base.StartN();
         _movementController.Start();
         _movementController.SetCanMove(true);

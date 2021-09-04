@@ -2421,7 +2421,7 @@ MonoBehaviour:
   _maxIndAttack: 4
   _characterController: {fileID: 8894960456130640444}
   _moveSpeed: 5
-  _moveAccelerate: 0.07
+  _moveAccelerate: 0.1
   _gravity: -9.81
   _jumpHeight: 0.5
   _meleeAttackController: {fileID: 6877136497482585597}
