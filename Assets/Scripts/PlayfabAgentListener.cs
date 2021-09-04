@@ -12,6 +12,9 @@ public class PlayfabAgentListener : MonoBehaviour
 
     public bool Debugging = true;
 
+    public bool shutdownServerInTime = false;
+
+    public float timeToShutDown;
 
     void Start()
     {
@@ -26,6 +29,9 @@ public class PlayfabAgentListener : MonoBehaviour
         Server.OnPlayerRemoved.AddListener(OnPlayerRemoved);
 
         StartCoroutine(ReadyForPlayers());
+
+        if (shutdownServerInTime)
+            StartCoroutine(StopServerInXSeconds(timeToShutDown));
     }
 
     private void OnServerActive()
@@ -36,6 +42,12 @@ public class PlayfabAgentListener : MonoBehaviour
 
     private void OnShutDown()
     {
+        Server.Stop();
+    }
+
+    IEnumerator StopServerInXSeconds(float time)
+    {
+        yield return new WaitForSeconds(time);
         Server.Stop();
     }
 
