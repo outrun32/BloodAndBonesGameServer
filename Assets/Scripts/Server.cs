@@ -99,7 +99,7 @@ class Server
                     return;
                 }
 
-                //or else you can literally stole someones id and throw packets from his pov
+                //or else you can literally stole someones id and throw packets from his client
                 if (clients[_clientId].udp.endPoint.ToString() == _clientEndPoint.ToString())
                 {
                     clients[_clientId].udp.HandleData(_packet);
