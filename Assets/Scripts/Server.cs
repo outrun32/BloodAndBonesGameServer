@@ -152,5 +152,6 @@ class Server
     {
         tcpListener.Stop();
         udpListener.Close();
+        Application.Quit();
     }
 }
