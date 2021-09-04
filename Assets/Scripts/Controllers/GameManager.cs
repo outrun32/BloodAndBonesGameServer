@@ -23,6 +23,7 @@ namespace Controllers
         void Start()
         {
             Server.OnClientAdded += ClientAdded;
+            Server.OnClientRemoved += ClientRemove;
             if (_isStartTime) StartCoroutine(WaitStartTime());
             _spawnTransforms = new Dictionary<Character.Character, Transform>();
             _redTeam = new Dictionary<string,(PlayerDataModel, Character.Character)>();
@@ -106,6 +107,14 @@ namespace Controllers
                 SpawnPlayer(true, Random.Range(0, 4), client);
                 client.Player.StartSession();
             }
+        }
+
+        public void ClientRemove(Client client)
+        {
+            _clients.Remove(client);
+            if (_teams[client.Username]) _redTeam.Remove(client.Username);
+            else _blueTeam.Remove(client.Username);
+            _teams.Remove(client.Username);
         }
         IEnumerator WaitStartTime()
         {

@@ -20,6 +20,7 @@ class Server
     private static TcpListener tcpListener;
     private static UdpClient udpListener;
     public static ReturnClient OnClientAdded;
+    public static ReturnClient OnClientRemoved;
     public static PlayerEvent OnPlayerAdded = new PlayerEvent();
     public static PlayerEvent OnPlayerRemoved = new PlayerEvent();
 

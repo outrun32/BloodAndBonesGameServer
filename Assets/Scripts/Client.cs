@@ -299,7 +299,7 @@ public class Client
         udp.Disconnect();
 
         Server.OnPlayerRemoved.Invoke(playfabID);
-
+        Server.OnClientRemoved.Invoke(this);
         ServerSend.PlayerDisconnected(id);
     }
 }
