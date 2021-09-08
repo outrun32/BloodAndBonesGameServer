@@ -3,6 +3,7 @@ using Controllers;
 using Controllers.Character;
 using Delegates;
 using Interfaces.Attack;
+using Models;
 using UnityEngine;
 
 public class Player : Character
@@ -36,6 +37,10 @@ public class Player : Character
     {
         _isStarted = true;
     }
+    public void EndSession()
+    {
+        _isStarted = false;
+    }
     public override void Initialize(int id, string username)
     {
         base.Initialize(id, username);
@@ -61,34 +66,32 @@ public class Player : Character
     
     private void SendPlayerData()
     {
-        ServerSend.PlayerPosition(this);
-        ServerSend.PlayerRotation(this);
-        ServerSend.PlayerAnimation(this);
-        ServerSend.PlayerInfo(this);
+        ServerSend.SendPlayerData(new PlayerSendingDataModel(ID,transform,GetAnimationModel(),Health,Mana));
     }       
     public void SetInput(InputModel inputModel)
     {
-        if (_isStarted)
+        if (!_isStarted)
         {
-            _inputDirection = Vector2.Lerp(_inputDirection, inputModel.JoystickAxis, _moveAccelerate);
-            inputModel.JoystickAxis = _inputDirection;
-            _movementController.SetInput(inputModel);
-            _animationController.Update(inputModel);
-            if (inputModel.IsAttacking)
-            {
-                _movementController.SetCanMove(false);
-                if (GetAnimationModel().AttackInd == 4)
-                {
-                    _movementController.MoveUntil();
-                    StartCoroutine(_movementController.StopMoveUntilByTime(1));
-                }
-                Debug.Log(GetAnimationModel().AttackInd);
-                _attackController.SetAttack(GetAnimationModel().AttackInd);
-                _attackController.Attack(10);
-            }
-
-            IsBlocking = inputModel.IsBlocking;
+            inputModel = new InputModel(Vector2.zero, inputModel.Rotation, false, false, false, false, false, false);
         }
+        _inputDirection = Vector2.Lerp(_inputDirection, inputModel.JoystickAxis, _moveAccelerate);
+        inputModel.JoystickAxis = _inputDirection;
+        _movementController.SetInput(inputModel);
+        _animationController.Update(inputModel);
+        if (inputModel.IsAttacking)
+        {
+            _movementController.SetCanMove(false);
+            if (GetAnimationModel().AttackInd == 4)
+            {
+                _movementController.MoveUntil();
+                StartCoroutine(_movementController.StopMoveUntilByTime(1));
+            }
+            Debug.Log(GetAnimationModel().AttackInd);
+            _attackController.SetAttack(GetAnimationModel().AttackInd);
+            _attackController.Attack(10);
+        }
+
+        IsBlocking = inputModel.IsBlocking;
     }
 
     public AnimationModel GetAnimationModel()
@@ -110,7 +113,7 @@ public class Player : Character
         {
             _animationController.Death();
             StartCoroutine(WaitDeath());
-            ServerSend.PlayerDeath(this);
+            ServerSend.PlayerDeath(ID);
         }
     }
     public void Damage(float value, DamageType damageType)

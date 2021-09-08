@@ -8,23 +8,32 @@ namespace Controllers
     public class GameManager : MonoBehaviour
     {
         private List<Client> _clients = new List<Client>();
-            
-            
+        [Header("Controllers")]
+        
         [SerializeField] private SpawnController _spawnController;
+
+        [Header("Time Settings")] 
         [SerializeField] private float _preloadTime = 30;
-        [SerializeField] private Dictionary<string,(PlayerDataModel, Character.Character)> _redTeam;
-        [SerializeField] private Dictionary<string,(PlayerDataModel, Character.Character)> _blueTeam;
-        [SerializeField] private Dictionary<string,bool> _teams = new Dictionary<string, bool>();
-        [SerializeField] private Dictionary<Character.Character, Transform> _spawnTransforms;
+        [SerializeField] private bool _isStartTime = true;
+        [SerializeField] private float _endTime = 120;
+        [SerializeField] private bool _isEndTime = true;
+        private float _startPreloadTime = 0;
+        private float _startTime = 0;
+        private bool _isStartedTimer = false;
+        private bool _isStartedSession = false;
+        [Header("Players Settings")]
         [SerializeField] private List<Transform> _spawnsRed;
         [SerializeField] private List<Transform> _spawnsBLue;
-        [SerializeField] private bool _isStartTime = true;
+        private Dictionary<string,(PlayerDataModel, Character.Character)> _redTeam;
+        private Dictionary<string,(PlayerDataModel, Character.Character)> _blueTeam;
+        private Dictionary<string,bool> _teams = new Dictionary<string, bool>();
+        private Dictionary<Character.Character, Transform> _spawnTransforms;
+        
         // Start is called before the first frame update
         void Start()
         {
             Server.OnClientAdded += ClientAdded;
             Server.OnClientRemoved += ClientRemove;
-            if (_isStartTime) StartCoroutine(WaitStartTime());
             _spawnTransforms = new Dictionary<Character.Character, Transform>();
             _redTeam = new Dictionary<string,(PlayerDataModel, Character.Character)>();
             _blueTeam = new Dictionary<string,(PlayerDataModel, Character.Character)>();
@@ -33,9 +42,13 @@ namespace Controllers
         // Update is called once per frame
         void Update()
         {
-            if (_preloadTime - Time.time > 0)
+            if (Time.time - _startPreloadTime < _preloadTime && _isStartedTimer)
             {
-                ServerSend.SetCountTimer(Mathf.CeilToInt(_preloadTime - Time.time));
+                ServerSend.SetCountTimer(0, Mathf.CeilToInt(_preloadTime - Time.time + _startPreloadTime));
+            }
+            if (Time.time - _startTime < _endTime && _isStartedSession)
+            {
+                ServerSend.SetCountTimer(1, Mathf.CeilToInt(_endTime - Time.time + _startTime));
             }
         }
 
@@ -58,8 +71,8 @@ namespace Controllers
             _spawnTransforms.Add(player, _spawnTransforms[character]);
             _spawnTransforms.Remove(character);
             Server.clients[character.ID].Respawn(player);
-            _spawnController.Respawn(character);
-            
+            _spawnController.DestroyCharacter(character);
+            ServerSend.PlayerTeam(player.ID, _teams[player.Username]);
             player.DeathCharacter += Death;
             player.DeathPlayerEvent += Respawn;
             player.StartSession();
@@ -72,6 +85,7 @@ namespace Controllers
             foreach (Client client in _clients)
             {
                 isRed = !isRed;
+                if (isRed) indexSpawn++;
                 SpawnPlayer(isRed, indexSpawn, client);
             }
         }
@@ -81,7 +95,7 @@ namespace Controllers
             Player player;
             if (isRed)
             {
-                indexSpawn++;
+                //indexSpawn++;
                 player = _spawnController.InstantiatePlayer(_spawnsRed[indexSpawn]);
                 _teams.Add(client.Username,true);
                 _spawnTransforms.Add(player,_spawnsRed[indexSpawn]);
@@ -98,9 +112,15 @@ namespace Controllers
             player.DeathCharacter += Death;
             player.DeathPlayerEvent += Respawn;
             client.SendIntoGame(player);
+            ServerSend.PlayerTeam(client.id, isRed);
         }
         public void ClientAdded(Client client)
         {
+            if (_clients.Count == 0)
+            {
+                if (_isStartTime && !_isStartedTimer) StartCoroutine(WaitStartTime());
+                _isStartedTimer = true;
+            }
             _clients.Add(client);
             if (!_isStartTime)
             {
@@ -118,13 +138,27 @@ namespace Controllers
         }
         IEnumerator WaitStartTime()
         {
+            _startPreloadTime = Time.time;
             yield return new WaitForSeconds(_preloadTime);
+            _startTime = Time.time;
+            _isStartedSession = true;
+            if (_isEndTime) StartCoroutine(WaitEndTime());
             SpawnPlayers();
             ServerSend.StartSession();
-            foreach (KeyValuePair<int,Client> client in Server.clients)
+            foreach (Client client in _clients)
             {
-                if (client.Value.Player) client.Value.Player.StartSession();
+                if (client.Player) client.Player.StartSession();
             }
+        }
+        IEnumerator WaitEndTime()
+        {
+            yield return new WaitForSeconds(_endTime);
+            foreach (Client client in _clients)
+            {
+                if (client.Player) client.Player.EndSession();
+            }
+            ServerSend.EndSession(new EndSessionModel(_redTeam, _blueTeam));
+
         }
     }
 }

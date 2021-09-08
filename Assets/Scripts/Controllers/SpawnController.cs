@@ -5,9 +5,9 @@ namespace Controllers
     public class SpawnController : MonoBehaviour
     {
         public Player playerPrefab;
-        public void Respawn(Character.Character player)
+        public void DestroyCharacter(Character.Character player)
         {
-            Debug.Log("RESPAWN");
+            Debug.Log("Destroy Character");
             Destroy(player.gameObject);
         
         }

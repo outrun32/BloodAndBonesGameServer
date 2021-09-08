@@ -22,6 +22,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Controllers/MeleePlayerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7E358363-73B7-4B12-BDE8-BA7FA4D53641/9d/fd5e026f/Socket.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Server.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Models/PlayerSendingDataModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Controllers/DamageController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Others/Delegates.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Controllers/Character/Character.cs" root0="FORCE_HIGHLIGHTING" />
@@ -32,6 +33,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Controllers/SpawnController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PKSP.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Controllers/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Models/EndSessionModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Interfaces/Attack/IAttack.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Controllers/ManaController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Controllers/Character/Attack/MeleeAttackController.cs" root0="FORCE_HIGHLIGHTING" />
@@ -42,6 +44,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Models/AnimationModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ServerHandle.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Models/PlayerSpawnModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Animation/MovementSTB.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/NetworkManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Animation/SetIntEnterSMB.cs" root0="FORCE_HIGHLIGHTING" />
@@ -65,8 +68,6 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Models/AnimationModel.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/HealthController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Animation/AtackSTB.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Packet.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/ServerSend.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Interfaces/ICharacter.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/MovementController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/CharacterController.cs" />
@@ -74,14 +75,19 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/Attack/SwordController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/DamageController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/Attack/MeleeAttackController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/Character.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/SpawnController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/AnimationController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Models/PlayerDataModel.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Others/Delegates.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/ServerHandle.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Server.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Models/PlayerSendingDataModel.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/Character.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Models/EndSessionModel.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Models/PlayerDataModel.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Models/PlayerSpawnModel.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Packet.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/SpawnController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/ServerSend.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Client.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/GameManager.cs" />
     </changedPaths>
@@ -153,7 +159,9 @@
       <workItem from="1630322278933" duration="11441000" />
       <workItem from="1630745965047" duration="4047000" />
       <workItem from="1630759260312" duration="57000" />
-      <workItem from="1630759390324" duration="1899000" />
+      <workItem from="1630759390324" duration="2518000" />
+      <workItem from="1630934798303" duration="15257000" />
+      <workItem from="1631110519030" duration="615000" />
     </task>
     <servers />
   </component>

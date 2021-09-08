@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -16,7 +15,9 @@ public enum ServerPackets
     playerInfo,
     playerDeath,
     setTimerCounter,
-    startSession
+    startSession,
+    endSession,
+    setTeam
 }
 
 /// <summary>Sent from client to server.</summary>

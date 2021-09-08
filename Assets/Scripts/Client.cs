@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Net;
 using System;
 using System.Net.Sockets;
+using Models;
 
 public class Client
 {
@@ -204,36 +205,7 @@ public class Client
         IsAutorized = true;
         Username = username;
     }
-
-    /// <summary>
-    /// Метод для создания игрока и отправки его в игру
-    /// </summary>
-    /// <param name="_playerName">Имя игрока</param>
-    public void SendIntoGame()
-    {
-        Player = NetworkManager.instance.InstantiatePlayer();
-        Player.Initialize(id, Username);
-        //отправляем информацию о всех игроках клиенту, чтобы они появились в его мире
-        foreach (Client _client in Server.clients.Values)
-        {
-            if (_client.Player != null)
-            {
-                //Except ourselves
-                if (_client.id != id)
-                {
-                    ServerSend.SpawnPlayer(id, _client.Player);
-                }
-            }
-        }
-        //аналогичное, но для клиента
-        foreach (Client _client in Server.clients.Values)
-        {
-            if (_client.Player != null)
-            {
-                ServerSend.SpawnPlayer(_client.id, Player);
-            }
-        }
-    }
+    
     /// <summary>
     /// Метод для создания игрока и отправки его в игру
     /// </summary>
@@ -243,23 +215,31 @@ public class Client
         Player = player;
         Player.Initialize(id, Username);
         //отправляем информацию о всех игроках клиенту, чтобы они появились в его мире
-        foreach (Client _client in Server.clients.Values)
+        foreach (Client client in Server.clients.Values)
         {
-            if (_client.Player != null)
+            Player player1 = client.Player;
+            if (player1 != null)
             {
                 //Except ourselves
-                if (_client.id != id)
+                if (client.id != id)
                 {
-                    ServerSend.SpawnPlayer(id, _client.Player);
+                    ServerSend.SpawnPlayer(id,
+                        new PlayerSpawnModel(player1.ID, player1.Username, player1.transform,
+                            player1.MAXHealth, player1.MAXMana, player1.StartMana,
+                            player1.StartHealth));
                 }
             }
         }
         //аналогичное, но для клиента
         foreach (Client _client in Server.clients.Values)
         {
+            Player player1 = Player;
             if (_client.Player != null)
             {
-                ServerSend.SpawnPlayer(_client.id, player);
+                ServerSend.SpawnPlayer(_client.id,
+                    new PlayerSpawnModel(player1.ID, player1.Username, player1.transform,
+                        player1.MAXHealth, player1.MAXMana, player1.StartMana,
+                        player1.StartHealth));
             }
         }
 
@@ -277,7 +257,10 @@ public class Client
         {
             if (_client.Player != null)
             {
-                ServerSend.SpawnPlayer(_client.id, Player);
+                ServerSend.SpawnPlayer(_client.id,
+                    new PlayerSpawnModel(Player.ID, Player.Username, Player.transform,
+                        Player.MAXHealth, Player.MAXMana, Player.StartMana,
+                        Player.StartHealth));
             }
         }
 
@@ -290,7 +273,7 @@ public class Client
 
         ThreadManager.ExecuteOnMainThread(() =>
         {
-            UnityEngine.Object.Destroy(Player.gameObject);
+            if (Player)UnityEngine.Object.Destroy(Player.gameObject);
             Player = null;
         });
 
