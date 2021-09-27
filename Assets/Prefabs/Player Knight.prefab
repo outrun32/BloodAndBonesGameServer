@@ -2271,7 +2271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fbc35a781de0774ba400c8f0fc2110b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MeleePlayerController: {fileID: 91771490951919401}
+  MeleePlayerController: {fileID: 6432066901513710266}
 --- !u!1 &7355752238191379470
 GameObject:
   m_ObjectHideFlags: 0
@@ -2315,7 +2315,8 @@ GameObject:
   - component: {fileID: 8655192236289928054}
   - component: {fileID: 8629069603906687142}
   - component: {fileID: 6877136497482585597}
-  - component: {fileID: 91771490951919401}
+  - component: {fileID: 8036233540766069974}
+  - component: {fileID: 6432066901513710266}
   m_Layer: 0
   m_Name: Player Knight
   m_TagString: Player
@@ -2368,6 +2369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588e2fbd9839e764382f6af6c0ab85ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healthController: {fileID: 8036233540766069974}
 --- !u!114 &8629069603906687142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2392,14 +2394,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b8c828dfac2c604a9c2b460706ab678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _character: {fileID: 91771490951919401}
+  _character: {fileID: 6432066901513710266}
   _swordControllers:
   - {fileID: 3729320733085678466}
   - {fileID: 3283779185357326099}
   - {fileID: 3729320733085678466}
   - {fileID: 4671265039045193620}
   - {fileID: 3729320733085678466}
---- !u!114 &91771490951919401
+--- !u!114 &8036233540766069974
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2408,10 +2410,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 7357682312667222211}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee8160be718a8474c98fe90a41eb33cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 3db703508cecc8b41b70d96267b0c761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6432066901513710266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7357682312667222211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f0d532fbfec92e4a8c448d7d8b3f44c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimatorSettings: {fileID: 11400000, guid: 036e750e5f94313458239a588f6f754b, type: 2}
   _damageController: {fileID: 8655192236289928054}
+  _healthController: {fileID: 8036233540766069974}
   _manaController: {fileID: 8629069603906687142}
   _maxHealth: 100
   _startHealth: 100
@@ -2425,7 +2441,6 @@ MonoBehaviour:
   _gravity: -9.81
   _jumpHeight: 0.5
   _meleeAttackController: {fileID: 6877136497482585597}
-  _distanceTeleport: 2.8
 --- !u!1 &7495619775315526216
 GameObject:
   m_ObjectHideFlags: 0

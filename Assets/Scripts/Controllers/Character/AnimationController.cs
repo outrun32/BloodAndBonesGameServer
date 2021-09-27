@@ -1,19 +1,26 @@
+using System;
 using Delegates;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Controllers.Character
-{
-    public class AnimationController
+{   
+    public class AnimationController: IAnimationContoller
     {
         private int _maxIndAttack = 0;
-        public ReturnVoid StopAttackEvent;
+       
         private bool _isAttacking = false;
         private Animator _animator;
 
-        public AnimationController(Animator animator, int maxIndAttack)
+        public ReturnVoid StopAttackEvent;
+        public AnimationController(int maxIndAttack)
+        {
+            _maxIndAttack = maxIndAttack;
+        }
+
+        public void Init(Animator animator, AnimatorSettings animatorSettingsS)
         {
             _animator = animator;
-            _maxIndAttack = maxIndAttack;
         }
 
         public void Update(InputModel inputModel)
@@ -54,7 +61,9 @@ namespace Controllers.Character
                 
             }
             else _isAttacking = _animator.GetBool("Attack");
-            return new AnimationModel(_animator.GetFloat("Speed"),
+
+            return new AnimationModel();
+            /*return new AnimationModel(_animator.GetFloat("Speed"),
                 _animator.GetFloat("SpeedX"),
                 _animator.GetFloat("SpeedY"),
                 _animator.GetInteger("AttackInd"),
@@ -63,9 +72,21 @@ namespace Controllers.Character
                 _animator.GetBool("SuperAttack"),
                 _animator.GetBool("Block"),
                 _animator.GetBool("BlockImpact"),
-                _animator.GetBool("Death"));
+                _animator.GetBool("Death"));*/
         }
 
+        public void SendMassage<T>(AnimationMessages message, T value)
+        {
+            switch (message)
+            {
+                case AnimationMessages.Damage:
+                    Damage(Convert.ToInt32(value));
+                    break;
+                case AnimationMessages.Death:
+                    Death();
+                    break;
+            }
+        }
         public void Damage(int value)
         {
             _animator.SetInteger("HitInd", value);

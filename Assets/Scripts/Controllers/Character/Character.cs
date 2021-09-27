@@ -7,6 +7,7 @@ namespace Controllers.Character
 {
     public class Character : MonoBehaviour
     {
+        public AnimatorSettings AnimatorSettings;
         public event ReturnTwoCharacter DeathCharacter;
         protected int _id;
         protected string _username;
@@ -17,10 +18,11 @@ namespace Controllers.Character
         protected Vector2 _inputDirection; 
         [Header("Character Settings")]
         [Header("Controllers")]
-        protected AnimationController _animationController;
+        protected IAnimationContoller _animationController;
         protected IAttack _attackController;
         
         [SerializeField] protected DamageController _damageController;
+        [SerializeField] protected HealthController _healthController;
         [SerializeField] protected ManaController _manaController;
         
         [Header("Health")] 
@@ -30,7 +32,7 @@ namespace Controllers.Character
         [SerializeField] private float _maxMana;
         [SerializeField] private float _startMana;
         [Header("Animation")] 
-        [SerializeField] private Animator _animator;
+        [SerializeField] protected Animator _animator;
         [SerializeField] private int _maxIndAttack = 0;
 
         public int ID => _id;
@@ -39,7 +41,7 @@ namespace Controllers.Character
         public float StartHealth => _startHealth;
         public float MAXMana => _maxMana;
         public float StartMana => _startMana;
-        public float Health => _damageController.Health;
+        public float Health => _healthController.Health;
         public float Mana => _manaController.Mana;
         public virtual bool IsBlocking
         {
@@ -59,18 +61,25 @@ namespace Controllers.Character
         {
             _isStarted = true;
         }
+        public void EndSession()
+        {
+            _isStarted = false;
+        }
         public virtual void Initialize(int id, string username)
         {
             _id = id;
             _username = username;
-            _damageController.Initialize(_startHealth, _maxHealth);
+            _healthController.Initialize(_startHealth, _maxHealth);
             _manaController.Initialize(_startMana, _maxMana);
-            _animationController = new AnimationController(_animator, _maxIndAttack);
         }
 
         public void GetDamage(float value, DamageType damageType, Character character)
         {
             if (Health <=0) DeathCharacter?.Invoke(character, this);
+        }
+        public AnimationModel GetAnimationModel()
+        {
+            return _animationController.GetAnimationModel();
         }
         public void StartN()
         {

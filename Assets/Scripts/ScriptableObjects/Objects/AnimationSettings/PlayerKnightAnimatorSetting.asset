@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ed924924c16624687ca8b05178f0fc, type: 3}
+  m_Name: PlayerKnightAnimatorSetting
+  m_EditorClassIdentifier: 
+  InputMagnitude:
+    Name: InputMagnitude
+    AnimationDataType: 2
+  X:
+    Name: X
+    AnimationDataType: 2
+  Z:
+    Name: Z
+    AnimationDataType: 2
+  WalkStartAngle:
+    Name: WalkStartAngle
+    AnimationDataType: 2
+  WalkStopAngle:
+    Name: WalkStopAngle
+    AnimationDataType: 2
+  IsStopRU:
+    Name: IsStopRU
+    AnimationDataType: 1
+  IsStopLU:
+    Name: IsStopLU
+    AnimationDataType: 1
+  HorAimAngle:
+    Name: HorAimAngle
+    AnimationDataType: 2
+  IsFalling:
+    Name: IsFalling
+    AnimationDataType: 1
+  IsDodge:
+    Name: IsDodge
+    AnimationDataType: 1
+  DodgeAngle:
+    Name: DodgeAngle
+    AnimationDataType: 2
+  LookAngle:
+    Name: LookAngle
+    AnimationDataType: 2
+  Shield:
+    Name: Shield
+    AnimationDataType: 2
+  IsHit:
+    Name: IsHit
+    AnimationDataType: 3
+  HitInd:
+    Name: HitFloat
+    AnimationDataType: 2
+  IsJumping:
+    Name: IsJumping
+    AnimationDataType: 1
+  IsDead:
+    Name: IsDead
+    AnimationDataType: 1
+  IsBlock:
+    Name: IsBlock
+    AnimationDataType: 3
+  BlockFloat:
+    Name: BlockFloat
+    AnimationDataType: 2
+  IsAttack:
+    Name: AttackTrigger
+    AnimationDataType: 3
+  AttackInd:
+    Name: AttackInd
+    AnimationDataType: 0

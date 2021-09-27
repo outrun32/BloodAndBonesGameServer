@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Controllers.Character
 {
-    public class MovementController
+    public class MovementController: IMovemennt
     {
         private CharacterController _characterController;
 
@@ -87,7 +87,6 @@ namespace Controllers.Character
         public void SetInput(InputModel inputModel)
         {
             _inputs = inputModel.JoystickAxis;
-            _transform.rotation = inputModel.Rotation;
             _isJumping = inputModel.IsJumping;
         }
 

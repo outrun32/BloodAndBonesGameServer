@@ -654,10 +654,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnController: {fileID: 1931725717}
-  _preloadTime: 20
-  _isStartTime: 1
+  _preloadTime: 3
+  _isStartTime: 0
   _endTime: 70
-  _isEndTime: 1
+  _isEndTime: 0
   _spawnsRed:
   - {fileID: 2047481177}
   - {fileID: 2081483481}
@@ -682,7 +682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4fb5f009cb43f84ca4b63fec26cb21c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 91771490951919401, guid: 8c4f429843903a84d8bf02bbdfb06582, type: 3}
+  playerPrefab: {fileID: 7948996791502641527, guid: 24f1b163d7131804eab00cf491cc531e, type: 3}
 --- !u!1 &1993193875
 GameObject:
   m_ObjectHideFlags: 0

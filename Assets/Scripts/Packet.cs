@@ -197,7 +197,7 @@ public class Packet : IDisposable
     public void Write(InputModel value)
     {
         Write(value.JoystickAxis);
-        Write(value.Rotation);
+        Write(value.CameraRotate);
         Write(value.IsJumping);
         Write(value.IsAttacking);
         Write(value.IsBlocking);
@@ -209,9 +209,13 @@ public class Packet : IDisposable
     /// <param name="_value">The InputModel to add.</param>
     public void Write(AnimationModel value)
     {
-        Write(value.Speed);
-        Write(value.SpeedX);
-        Write(value.SpeedY);
+        Write(value.InputMagnitude);
+        Write(value.X);
+        Write(value.Z);
+        Write(value.WalkStartAngle);
+        Write(value.WalkStopAngle);
+        Write(value.IsStopRU);
+        Write(value.ISStopLU);
         Write(value.AttackInd);
         Write(value.HitInd);
         Write(value.IsAttack);
@@ -219,6 +223,14 @@ public class Packet : IDisposable
         Write(value.IsBlock);
         Write(value.IsBlockImpact);
         Write(value.IsDeath);
+        Write(value.IsHit);
+        Write(value.IsJumping);
+        Write(value.IsFalling);
+        Write(value.IsDodge);
+        Write(value.HorAimAngle);
+        Write(value.Shield);
+        Write(value.LookAngle);
+        Write(value.BlockFloat);
     }
     #endregion
 
@@ -425,7 +437,10 @@ public class Packet : IDisposable
     /// <returns>Vector3</returns>
     public InputModel ReadInputModel(bool _moveReadPos = true)
     {
-        return new InputModel(ReadVector2(_moveReadPos), ReadQuaternion(_moveReadPos), ReadBool(_moveReadPos), ReadBool(_moveReadPos), ReadBool(_moveReadPos), ReadBool(_moveReadPos), ReadBool(_moveReadPos), ReadBool(_moveReadPos));
+        return new InputModel(ReadVector2(_moveReadPos), ReadFloat(_moveReadPos), 
+            ReadBool(_moveReadPos), 
+            ReadBool(_moveReadPos), ReadBool(_moveReadPos), ReadBool(_moveReadPos), 
+            ReadBool(_moveReadPos), ReadBool(_moveReadPos),ReadBool(_moveReadPos));
     }
     #endregion
 

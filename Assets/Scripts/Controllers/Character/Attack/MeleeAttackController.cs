@@ -69,8 +69,5 @@ namespace Controllers.Character.Attack
                 swordController.ReturnObjectEvent -= SetDamage;
             }
         }
-
-      
-        
     }
 }

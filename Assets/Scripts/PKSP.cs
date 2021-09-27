@@ -6,8 +6,4 @@ using UnityEngine;
 public class PKSP : MonoBehaviour
 {
     public MeleePlayerController MeleePlayerController;
-    public void SetPosition()
-    {
-        MeleePlayerController.SetPosition();
-    }
 }
