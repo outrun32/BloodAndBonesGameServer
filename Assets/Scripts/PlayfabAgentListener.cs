@@ -12,9 +12,10 @@ public class PlayfabAgentListener : MonoBehaviour
 
     public bool Debugging = true;
 
-    public bool shutdownServerInTime = false;
-
     public float timeToShutDown;
+
+    private bool _canBeShutDown = false;
+
 
     void Start()
     {
@@ -37,7 +38,7 @@ public class PlayfabAgentListener : MonoBehaviour
     private void OnServerActive()
     {
         if (!NetworkManager.instance.startServerInNManager)
-            Server.Start(10, NetworkManager.instance.Port);
+            Server.Start(10, NetworkManager.instance.PortTCP, NetworkManager.instance.PortUDP);
     }
 
     private void OnShutDown()
@@ -60,12 +61,18 @@ public class PlayfabAgentListener : MonoBehaviour
     {
         ConnectedPlayer player = _connectedPlayers.Find(x => x.PlayerId.Equals(playfabId, System.StringComparison.OrdinalIgnoreCase));
         _connectedPlayers.Remove(player);
+        if(_connectedPlayers.Count == 0 && _canBeShutDown)
+        {
+            Debug.Log("Last player left, shutting down server");
+            StartCoroutine(StopServerInXSeconds(timeToShutDown));
+        }
         PlayFabMultiplayerAgentAPI.UpdateConnectedPlayers(_connectedPlayers);
     }
 
     private void OnPlayerAdded(string playfabId)
     {
         _connectedPlayers.Add(new ConnectedPlayer(playfabId));
+        _canBeShutDown = true;
         PlayFabMultiplayerAgentAPI.UpdateConnectedPlayers(_connectedPlayers);
     }
 
