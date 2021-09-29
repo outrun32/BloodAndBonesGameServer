@@ -9,12 +9,11 @@ using UnityEngine.Events;
 class Server
 {
     public static int MaxPlayers { get; private set; }
-    public static int Port { get; private set; }
+    public static int PortTCP { get; private set; }
+    public static int PortUDP { get; private set; }
     public static Dictionary<int, Client> clients = new Dictionary<int, Client>();
     public delegate void PacketHandler(int _fromClient, Packet _packet);
     public static Dictionary<int, PacketHandler> packetHandlers;
-
-
 
     private static TcpListener tcpListener;
     private static UdpClient udpListener;
@@ -31,25 +30,26 @@ class Server
         Debug.Log("Starting Server...");
         InitializeServerData();
 
-        tcpListener = new TcpListener(IPAddress.Any, Port);
+        tcpListener = new TcpListener(IPAddress.Any, PortTCP);
         tcpListener.Start();
         tcpListener.BeginAcceptTcpClient(new AsyncCallback(TCPConnectCallback), null);
-        udpListener = new UdpClient(Port);
+        udpListener = new UdpClient(PortUDP);
         udpListener.Client.IOControl((IOControlCode)Constants.SIO_UDP_CONNRESET, new byte[] { 0, 0, 0, 0 }, null);
         udpListener.BeginReceive(UDPReceiveCallback, null);
 
-        Debug.Log($"Server started on port {Port}.");
+        Debug.Log($"Server started on port TCP: {PortTCP} and port UDP: {PortUDP}.");
     }
 
-    public static void Start(int _maxPlayers, int _port)
+    public static void Start(int _maxPlayers, int _portTCP, int _portUDP)
     {
-        SetPort(_port);
+        SetPort(_portTCP, _portUDP);
         Start(_maxPlayers);
     }
 
-    public static void SetPort(int _port)
+    public static void SetPort(int _portTCP, int _portUDP)
     {
-        Port = _port;
+        PortTCP = _portTCP;
+        PortUDP = _portUDP;
     }
 
     private static void TCPConnectCallback(IAsyncResult _result)

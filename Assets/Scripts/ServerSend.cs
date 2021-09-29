@@ -9,7 +9,6 @@ public class ServerSend
         _packet.WriteLength();
         Server.clients[_toClient].tcp.SendData(_packet);
     }
-
     private static void SendTCPDataToAll(Packet _packet)
     {
         _packet.WriteLength();
@@ -29,7 +28,6 @@ public class ServerSend
             }
         }
     }
-
     private static void SendUDPData(int _toClient, Packet _packet)
     {
         _packet.WriteLength();
@@ -67,8 +65,12 @@ public class ServerSend
             SendTCPData(_toClient, _packet);
         }
     }
+<<<<<<< Updated upstream
 
     public static void SpawnPlayer(int _toClient, Player _player)
+=======
+    public static void SpawnPlayer(int _toClient, PlayerSpawnModel _player)
+>>>>>>> Stashed changes
     {
         using (Packet _packet = new Packet((int)ServerPackets.spawnPlayer))
         {
