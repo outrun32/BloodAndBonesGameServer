@@ -24,6 +24,7 @@ namespace Controllers.Character
         [SerializeField] protected DamageController _damageController;
         [SerializeField] protected HealthController _healthController;
         [SerializeField] protected ManaController _manaController;
+        [SerializeField] protected CheckHitController _checkHitController;
         
         [Header("Health")] 
         [SerializeField] private float _maxHealth;
@@ -85,7 +86,7 @@ namespace Controllers.Character
         {
             _damageController.DamageCharacterEvent += GetDamage;
             _attackController.NStart();
-            Debug.Log("NSTART Attack Controller");
+            _checkHitController.Init(_animationController);
         }
         public virtual void OnEnableN()
         {

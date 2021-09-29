@@ -9,6 +9,9 @@ public class PlayerKnightAnimationController : IAnimationContoller
     private AnimatorSettings _animatorSettings;
     private Animator _animator;
     private float _speedUp = 1.2f;
+    private float _lookAngle = 0;
+    private float _lookAngleValue = 0;
+    private float _lookAngleSpeed = 5;
     private float _speedDown = 2;
     private float _speedShield = 1.5f;
     private float _shield = 0;
@@ -35,7 +38,11 @@ public class PlayerKnightAnimationController : IAnimationContoller
 
         _inputAxis = axis;
         if (!_isAim) axis = axis * 1.7f;
-        _axis = Vector2.Lerp(_axis, axis, (axis.magnitude < _axis.magnitude? _speedDown: _speedUp) * Time.deltaTime);
+        if (axis.magnitude < 0.8)
+            _axis = Vector2.Lerp(_axis, axis,
+                (axis.magnitude < _axis.magnitude ? _speedDown : _speedUp) * Time.deltaTime);
+        else _axis = axis;
+        if (axis.magnitude < 0.2) _axis = Vector2.zero;
         if (_isAim) _shieldUp = 1;
         else
         {_shieldUp = 0;
@@ -131,7 +138,6 @@ public class PlayerKnightAnimationController : IAnimationContoller
     {
         
         SetValue(_animatorSettings.IsAttack, inputModel.IsAttacking);
-        Debug.Log($"inputModel.IsStrafing = {inputModel.IsStrafing}");
         if (inputModel.IsStrafing) Dodging(inputModel.JoystickAxis);
         else SetValue(_animatorSettings.IsDodge, false);
         SetIsAim(inputModel.IsAim);
@@ -148,7 +154,12 @@ public class PlayerKnightAnimationController : IAnimationContoller
                 if (!isRotate)_transform.Rotate(0,inputModel.CameraRotate * Time.deltaTime * 10,0);
             }
         }
-        
+
+        if (!_isAim && !isRotate) _lookAngle = Mathf.Clamp(inputModel.CameraRotate, -90,90);
+        else _lookAngle = 0;
+        _lookAngleValue = Mathf.Lerp(_lookAngleValue, _lookAngle, Time.deltaTime * _lookAngleSpeed); 
+        SetValue(_animatorSettings.LookAngle, _lookAngleValue);
+
         SetDirectionMove((!isRotate)?inputModel.JoystickAxis: Vector2.zero);
         
     }
@@ -194,11 +205,16 @@ public class PlayerKnightAnimationController : IAnimationContoller
                 SetValue(_animatorSettings.HorAimAngle, 0f);
                 isRotate = false;
                 break;
+            case AnimationMessages.HitInd:
+                SetValue(_animatorSettings.IsHit, true);
+                SetValue(_animatorSettings.HitInd, value);
+                break;
         }
     }
     public void Damage(int value)
     {
         SetValue(_animatorSettings.HitInd, value);
+        SetValue(_animatorSettings.IsHit, true);
     }
     public void Death()
     {
@@ -206,7 +222,7 @@ public class PlayerKnightAnimationController : IAnimationContoller
     }
 }
 
-
+//public enum Animation
 public class TriggerVar
 {
     private bool _value;

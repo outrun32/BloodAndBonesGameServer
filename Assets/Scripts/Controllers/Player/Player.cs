@@ -42,8 +42,8 @@ public class Player : Character
     }
 
     public virtual void Start()
-    {   
-        base.StartN();
+    {
+        StartN();
         _movementController.Start();
         _movementController.SetCanMove(true);
 
@@ -59,8 +59,7 @@ public class Player : Character
     
     private void SendPlayerData()
     {
-        _animationModel = GetAnimationModel();
-        Debug.Log(_animationModel.IsAttack);
+        _animationModel = GetAnimationModel();  
         ServerSend.SendPlayerData(new PlayerSendingDataModel(ID,transform,_animationModel,Health,Mana));
     }       
     public virtual void SetInput(InputModel inputModel)
@@ -142,6 +141,18 @@ public class Player : Character
         {
             case "EndRotation":
                 _animationController.SendMassage(AnimationMessages.EndRotation,"");
+                break;
+        }
+    }public virtual void SendEvent(string message)
+    {
+        Debug.Log($"SendEvent: {message}");
+        switch (message)
+        {
+            case "toStrike":
+               //EndAttack();
+                break;
+            case "endAttack":
+                EndAttack();
                 break;
         }
     }

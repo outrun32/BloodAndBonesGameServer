@@ -7,6 +7,8 @@ namespace Delegates
     public delegate void ReturnVoid();
     public delegate void ReturnInt(int value);
     public delegate void ReturnFloat(float value);
+    public delegate void ReturnCollider(Collider value);
+    public delegate void ReturnNameAndCollider(string name, Collider value);
     public delegate void ReturnPlayer(Player value);
     public delegate void ReturnTwoPlayer(Player player1, Player player2);
     public delegate void ReturnCharacter(Character player);

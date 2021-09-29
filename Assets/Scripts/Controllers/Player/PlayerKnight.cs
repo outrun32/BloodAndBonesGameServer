@@ -4,10 +4,9 @@ namespace Controllers
 {
     public class PlayerKnight : MeleePlayerController
     {
-        private PlayerKnightAnimationController _playerKnightAnimationController;
+        private PlayerKnightAnimationController _playerKnightAnimationController;           
         public override void Start()
         {
-            Debug.Log("ВСЕ ГОВНО. ЭТО ЕБУЧИЙ СТАРТ");
             _movementController = new MovementByAnimationController(transform);
             _playerKnightAnimationController = new PlayerKnightAnimationController(transform);
             _animationController = _playerKnightAnimationController;
@@ -25,7 +24,7 @@ namespace Controllers
         public override void Damage()
         {
             base.Damage();
-            _animationController.SendMassage(AnimationMessages.Damage, 2);
+            _animationController.SendMassage(AnimationMessages.Damage, 1);
         }
     }
 }
