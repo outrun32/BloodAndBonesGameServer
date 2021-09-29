@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -306,7 +306,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da7775e94c4fb73429fa8716bb31253d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _port: 26950
+  playerPrefab: {fileID: 0}
+  _portTCP: 9339
+  _portUDP: 15001
   startServerInNManager: 1
 --- !u!114 &484791569
 MonoBehaviour:
@@ -347,7 +349,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Debugging: 0
-  shutdownServerInTime: 0
   timeToShutDown: 0
 --- !u!1 &693764507
 GameObject:

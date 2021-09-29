@@ -31,8 +31,6 @@ public class PlayfabAgentListener : MonoBehaviour
 
         StartCoroutine(ReadyForPlayers());
 
-        if (shutdownServerInTime)
-            StartCoroutine(StopServerInXSeconds(timeToShutDown));
     }
 
     private void OnServerActive()
