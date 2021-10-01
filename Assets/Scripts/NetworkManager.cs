@@ -4,8 +4,6 @@ public class NetworkManager : MonoBehaviour
 {
     public static NetworkManager instance;
 
-    public Player playerPrefab;
-
     [SerializeField] private int _portTCP = 26950;
     [SerializeField] private int _portUDP = 26950;
 

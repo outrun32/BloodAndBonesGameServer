@@ -223,12 +223,12 @@ public class PlayerKnightAnimationController : IAnimationContoller
                 break;
             case AnimationMessages.EndHit:
                 isEndHit = true;
-                SetValue(_animatorSettings.HorAimAngle, 0);
+                //SetValue(_animatorSettings.HorAimAngle, 0f);
                 isRotate = false;
                 break;
         }
     }
-    public void Damage(int value)
+    public void Damage(float value)
     {
         SetValue(_animatorSettings.HitInd, value);
         SetValue(_animatorSettings.IsHit, true);
