@@ -121,7 +121,12 @@ namespace Controllers
                 if (_isStartTime && !_isStartedTimer) StartCoroutine(WaitStartTime());
                 _isStartedTimer = true;
             }
+            foreach (var client2 in _clients)
+            {
+                if (client2.Username == client.Username) client.Username += Random.Range((int) 0, (int) 100).ToString();
+            }
             _clients.Add(client);
+            
             if (!_isStartTime)
             {
                 SpawnPlayer(true, Random.Range(0, 4), client);
