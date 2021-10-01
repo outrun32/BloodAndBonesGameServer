@@ -5540,10 +5540,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnController: {fileID: 1931725717}
-  _preloadTime: 30
-  _isStartTime: 0
-  _endTime: 70
-  _isEndTime: 0
+  _preloadTime: 60
+  _isStartTime: 1
+  _endTime: 120
+  _isEndTime: 1
   _spawnsRed:
   - {fileID: 2047481177}
   - {fileID: 2081483481}
