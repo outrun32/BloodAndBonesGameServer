@@ -9,6 +9,7 @@ public class CheckHitController : MonoBehaviour
     public OnTriggeredEnterController Center;
     public OnTriggeredEnterController Left;
     public OnTriggeredEnterController Right;
+    [SerializeField]private List<Collider> _hitsColliders;
     public string Tag;
     public void Init(IAnimationContoller animationContoller)
     {
@@ -37,7 +38,7 @@ public class CheckHitController : MonoBehaviour
     private void OnTriggeredEnterInvoke(string name, Collider collider)
     {
         Debug.Log($"CheckTag {collider.tag} Name = {collider.name}");
-        if(collider.CompareTag(Tag))
+        if(collider.CompareTag(Tag) && !_hitsColliders.Contains(collider))
         {
             Debug.Log("Set Hit Ind");
             switch (name)

@@ -16,5 +16,6 @@ public enum AnimationMessages
     Damage,
     Death,
     EndRotation,
-    HitInd
+    HitInd,
+    EndHit
 }

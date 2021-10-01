@@ -351,7 +351,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1723999499729128184}
   - {fileID: 6118166265715862983}
   m_Father: {fileID: 6660819656036215506}
   m_RootOrder: 1
@@ -1088,13 +1087,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3733990480884655163}
-  m_LocalRotation: {x: -0.59292156, y: -0.68578315, z: -0.30251533, w: -0.29432973}
-  m_LocalPosition: {x: 0, y: -0.103, z: -0.091}
-  m_LocalScale: {x: 0.30208367, y: 0.05063349, z: 0.42921224}
+  m_LocalRotation: {x: -0.74867404, y: -0.6592628, z: 0.06971256, w: 0.000079601974}
+  m_LocalPosition: {x: -0.002, y: -0.117, z: -0.09}
+  m_LocalScale: {x: 0.048227657, y: 0.31417572, z: 0.42921224}
   m_Children: []
   m_Father: {fileID: 4943331832057426316}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -3.778, y: -229.826, z: 83.448}
+  m_LocalEulerAnglesHint: {x: 5.267, y: -173.977, z: 97.545}
 --- !u!33 &3157799959800191784
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2151,13 +2150,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6302882295306412013}
-  m_LocalRotation: {x: -0.4953589, y: -0.03651885, z: 0.5491568, w: 0.6720958}
-  m_LocalPosition: {x: 0.5429999, y: -0.48999935, z: -0.4630004}
-  m_LocalScale: {x: 0.16387011, y: 0.030000001, z: 0.9947248}
+  m_LocalRotation: {x: 0.01267473, y: 0.000000029802308, z: 0.000000018626443, w: 0.99991965}
+  m_LocalPosition: {x: 0, y: 0.033, z: -0.802}
+  m_LocalScale: {x: 0.16387008, y: 0.029999994, z: 0.9947244}
   m_Children: []
-  m_Father: {fileID: 8075976760965866292}
+  m_Father: {fileID: 6118166265715862983}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -38.737, y: -49.501, z: 96.915}
+  m_LocalEulerAnglesHint: {x: 1.452, y: 0, z: 0}
 --- !u!33 &5849716169020018265
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3027,6 +3026,10 @@ MonoBehaviour:
   Center: {fileID: 590724902648305558}
   Left: {fileID: 5235005892729178549}
   Right: {fileID: 6145440734058582629}
+  _hitsColliders:
+  - {fileID: 8936065766811727479}
+  - {fileID: 6682463448619042155}
+  - {fileID: 7727001782270510247}
   Tag: Damage
 --- !u!114 &6825880240056134800
 MonoBehaviour:
@@ -3663,7 +3666,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4746179031630123072, guid: 64f94d66cd317c74f99960ca8c51a8d7, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4746179031630123072, guid: 64f94d66cd317c74f99960ca8c51a8d7, type: 3}
       propertyPath: m_LocalPosition.x

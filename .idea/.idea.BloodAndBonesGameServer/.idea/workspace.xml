@@ -83,7 +83,6 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Client.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/GameManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/PKSP.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/Attack/MeleeAttackController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/ManaController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Interfaces/IMovemennt.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/AnimationController.cs" />
@@ -98,15 +97,16 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Packet.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/ServerSend.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Others/Delegates.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Interfaces/IAnimationContollrer.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/CheckShieldontroller.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Animations/PlayerKnightAnimationController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Player/PlayerKnight.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/MeleePlayerController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Player/Player.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/Character.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/CheckHitController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/OnTriggeredEnterController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/Attack/MeleeAttackController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Interfaces/IAnimationContollrer.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Animations/PlayerKnightAnimationController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Player/Player.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/CheckHitController.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1wqns0dlUIBHibJRDq75cvY4ufM" />
@@ -149,10 +149,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="23620">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="23620" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -186,6 +186,8 @@
       <workItem from="1632637724490" duration="7689000" />
       <workItem from="1632648464014" duration="15983000" />
       <workItem from="1632730808428" duration="23262000" />
+      <workItem from="1632928216227" duration="5597000" />
+      <workItem from="1633071682282" duration="2860000" />
     </task>
     <servers />
   </component>

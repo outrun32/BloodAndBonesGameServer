@@ -17,6 +17,7 @@ public class PlayerKnightAnimationController : IAnimationContoller
     private float _shield = 0;
     private float _shieldUp = 0;
     private bool isRotate;
+    private bool isEndHit;
     private Vector3 _rotation;
     private Vector2 _axis = Vector2.zero;
     private Vector2 _inputAxis = Vector2.zero;
@@ -143,27 +144,37 @@ public class PlayerKnightAnimationController : IAnimationContoller
         SetIsAim(inputModel.IsAim);
         if (inputModel.JoystickAxis.magnitude > 0.1f)
         {
-            if (Mathf.Abs(inputModel.CameraRotate) > 60)
-            {
-                if(!isRotate)SetValue(_animatorSettings.HorAimAngle, inputModel.CameraRotate);
-
-                isRotate = true;
-            }
-            else
-            {
-                if (!isRotate)_transform.Rotate(0,inputModel.CameraRotate * Time.deltaTime * 10,0);
-            }
+            HorAimRotate(inputModel);
         }
 
         if (!_isAim && !isRotate) _lookAngle = Mathf.Clamp(inputModel.CameraRotate, -90,90);
         else _lookAngle = 0;
+
+        if (_isAim)
+        {
+            HorAimRotate(inputModel);
+        }
         _lookAngleValue = Mathf.Lerp(_lookAngleValue, _lookAngle, Time.deltaTime * _lookAngleSpeed); 
         SetValue(_animatorSettings.LookAngle, _lookAngleValue);
 
-        SetDirectionMove((!isRotate)?inputModel.JoystickAxis: Vector2.zero);
+        SetDirectionMove(!isRotate?inputModel.JoystickAxis: Vector2.zero);
+        Debug.Log(!isRotate);
         
     }
 
+    private void HorAimRotate(InputModel inputModel)
+    {
+        if (Mathf.Abs(inputModel.CameraRotate) > 60)
+        {
+            if(!isRotate)SetValue(_animatorSettings.HorAimAngle, inputModel.CameraRotate);
+
+            isRotate = true;
+        }
+        else
+        {
+            if (!isRotate)_transform.Rotate(0,inputModel.CameraRotate * Time.deltaTime * 10,0);
+        }
+    }
     public AnimationModel GetAnimationModel()
     { return new AnimationModel(
         (float)GetValue(_animatorSettings.InputMagnitude),
@@ -207,7 +218,13 @@ public class PlayerKnightAnimationController : IAnimationContoller
                 break;
             case AnimationMessages.HitInd:
                 SetValue(_animatorSettings.IsHit, true);
-                SetValue(_animatorSettings.HitInd, value);
+                isEndHit = false;
+                if(isEndHit)SetValue(_animatorSettings.HitInd, value);
+                break;
+            case AnimationMessages.EndHit:
+                isEndHit = true;
+                SetValue(_animatorSettings.HorAimAngle, 0);
+                isRotate = false;
                 break;
         }
     }

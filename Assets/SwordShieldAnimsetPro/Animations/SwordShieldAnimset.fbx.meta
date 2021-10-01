@@ -7,7 +7,7 @@ labels:
 - Sword
 - Combat
 ModelImporter:
-  serializedVersion: 20200
+  serializedVersion: 21100
   internalIDToNameTable:
   - first:
       1: 100000
@@ -1634,8 +1634,8 @@ ModelImporter:
       curves: []
       events:
       - time: 0.8956418
-        functionName: SendMessage
-        data: EndRotation
+        functionName: SendEvent
+        data: EndRotate
         objectReferenceParameter: {fileID: 11500000, guid: ebcd795e62954774cb3df6e6ee98eed8, type: 3}
         floatParameter: 0
         intParameter: 0
@@ -1822,8 +1822,8 @@ ModelImporter:
       curves: []
       events:
       - time: 0.9591852
-        functionName: SendMessage
-        data: EndRotation
+        functionName: SendEvent
+        data: EndRotate
         objectReferenceParameter: {fileID: 11500000, guid: ebcd795e62954774cb3df6e6ee98eed8, type: 3}
         floatParameter: 0
         intParameter: 0
@@ -2010,8 +2010,8 @@ ModelImporter:
       curves: []
       events:
       - time: 0.96628934
-        functionName: SendMessage
-        data: EndRotation
+        functionName: SendEvent
+        data: EndRotate
         objectReferenceParameter: {fileID: 11500000, guid: ebcd795e62954774cb3df6e6ee98eed8, type: 3}
         floatParameter: 0
         intParameter: 0
@@ -2198,8 +2198,8 @@ ModelImporter:
       curves: []
       events:
       - time: 0.82009083
-        functionName: SendMessage
-        data: EndRotation
+        functionName: SendEvent
+        data: EndRotate
         objectReferenceParameter: {fileID: 11500000, guid: ebcd795e62954774cb3df6e6ee98eed8, type: 3}
         floatParameter: 0
         intParameter: 0
@@ -10167,7 +10167,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 1
+        functionName: SendEvent
+        data: EndHit
+        objectReferenceParameter: {fileID: 11500000, guid: ebcd795e62954774cb3df6e6ee98eed8, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1
@@ -10348,7 +10355,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 1
+        functionName: SendEvent
+        data: EndHit
+        objectReferenceParameter: {fileID: 11500000, guid: ebcd795e62954774cb3df6e6ee98eed8, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1
@@ -10529,7 +10543,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.9695653
+        functionName: SendEvent
+        data: EndHit
+        objectReferenceParameter: {fileID: 11500000, guid: ebcd795e62954774cb3df6e6ee98eed8, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1
@@ -10710,7 +10731,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.93478256
+        functionName: SendEvent
+        data: EndHit
+        objectReferenceParameter: {fileID: 11500000, guid: ebcd795e62954774cb3df6e6ee98eed8, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1
@@ -10891,7 +10919,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.93043476
+        functionName: SendEvent
+        data: EndHit
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1
@@ -11072,7 +11107,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.95217395
+        functionName: SendEvent
+        data: EndHit
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1
@@ -11253,7 +11295,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.92608696
+        functionName: SendEvent
+        data: EndHit
+        objectReferenceParameter: {fileID: 11500000, guid: ebcd795e62954774cb3df6e6ee98eed8, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1
@@ -11434,7 +11483,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.9478261
+        functionName: SendEvent
+        data: EndHit
+        objectReferenceParameter: {fileID: 11500000, guid: ebcd795e62954774cb3df6e6ee98eed8, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1

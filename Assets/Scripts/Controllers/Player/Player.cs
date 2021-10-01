@@ -133,17 +133,7 @@ public class Player : Character
         //DeathEvent?.Invoke();
         DeathPlayerEvent?.Invoke(this);
     }
-    
-    public virtual void SendMessage(string message)
-    {
-        Debug.Log("Message");
-        switch (message)
-        {
-            case "EndRotation":
-                _animationController.SendMassage(AnimationMessages.EndRotation,"");
-                break;
-        }
-    }public virtual void SendEvent(string message)
+    public virtual void SendEvent(string message)
     {
         Debug.Log($"SendEvent: {message}");
         switch (message)
@@ -153,6 +143,12 @@ public class Player : Character
                 break;
             case "endAttack":
                 EndAttack();
+                break;
+            case "EndRotate":
+                _animationController.SendMassage(AnimationMessages.EndRotation,"");
+                break;
+            case "EndHit":
+                _animationController.SendMassage(AnimationMessages.EndHit,"");
                 break;
         }
     }
