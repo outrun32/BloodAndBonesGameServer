@@ -153,6 +153,7 @@ public class PlayerKnightAnimationController : IAnimationContoller
         if (_isAim)
         {
             HorAimRotate(inputModel);
+            Debug.Log(inputModel.CameraRotate);
         }
         _lookAngleValue = Mathf.Lerp(_lookAngleValue, _lookAngle, Time.deltaTime * _lookAngleSpeed); 
         SetValue(_animatorSettings.LookAngle, _lookAngleValue);
