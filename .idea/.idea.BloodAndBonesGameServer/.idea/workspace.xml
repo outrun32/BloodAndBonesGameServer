@@ -71,7 +71,6 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Animation/AtackSTB.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Interfaces/ICharacter.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/CharacterController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/NetworkManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Character/Attack/SwordController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/ServerHandle.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Server.cs" />
@@ -81,7 +80,6 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Models/PlayerSpawnModel.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/SpawnController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Client.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/GameManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/PKSP.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/ManaController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Interfaces/IMovemennt.cs" />
@@ -107,6 +105,8 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Animations/PlayerKnightAnimationController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Player/Player.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/CheckHitController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/NetworkManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/GameManager.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1wqns0dlUIBHibJRDq75cvY4ufM" />
@@ -187,7 +187,7 @@
       <workItem from="1632648464014" duration="15983000" />
       <workItem from="1632730808428" duration="23262000" />
       <workItem from="1632928216227" duration="5597000" />
-      <workItem from="1633071682282" duration="2860000" />
+      <workItem from="1633071682282" duration="5035000" />
     </task>
     <servers />
   </component>
@@ -219,10 +219,10 @@
           <line>99</line>
           <properties documentPath="E:\Projects\GitHub\Server\BloodAndBonesGameServer\Assets\Scripts\Server.cs" initialLine="97" containingFunctionPresentation="method 'SendUDPData'">
             <startOffsets>
-              <option value="3305" />
+              <option value="3477" />
             </startOffsets>
             <endOffsets>
-              <option value="3306" />
+              <option value="3478" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="1" />

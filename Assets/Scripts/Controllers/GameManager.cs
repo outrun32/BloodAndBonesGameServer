@@ -112,7 +112,6 @@ namespace Controllers
             player.DeathCharacter += Death;
             player.DeathPlayerEvent += Respawn;
             client.SendIntoGame(player);
-            ServerSend.PlayerTeam(client.id, isRed);
         }
         public void ClientAdded(Client client)
         {

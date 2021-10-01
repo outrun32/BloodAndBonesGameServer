@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -306,7 +306,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da7775e94c4fb73429fa8716bb31253d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 0}
   _portTCP: 9339
   _portUDP: 15001
   startServerInNManager: 1
@@ -5541,9 +5540,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnController: {fileID: 1931725717}
   _preloadTime: 30
-  _isStartTime: 0
-  _endTime: 70
-  _isEndTime: 0
+  _isStartTime: 1
+  _endTime: 30
+  _isEndTime: 1
   _spawnsRed:
   - {fileID: 2047481177}
   - {fileID: 2081483481}
