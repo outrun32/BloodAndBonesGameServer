@@ -306,7 +306,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da7775e94c4fb73429fa8716bb31253d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 0}
   _portTCP: 9339
   _portUDP: 15001
   startServerInNManager: 1
@@ -5540,9 +5539,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnController: {fileID: 1931725717}
-  _preloadTime: 60
+  _preloadTime: 10
   _isStartTime: 1
-  _endTime: 120
+  _endTime: 60
   _isEndTime: 1
   _spawnsRed:
   - {fileID: 2047481177}
