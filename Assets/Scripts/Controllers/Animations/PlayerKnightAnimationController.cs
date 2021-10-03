@@ -173,7 +173,12 @@ public class PlayerKnightAnimationController : IAnimationContoller
         }
         else
         {
-            if (!isRotate)_transform.Rotate(0,inputModel.CameraRotate * Time.deltaTime * 10,0);
+            if (!isRotate)
+                _transform.rotation = Quaternion.Euler(Vector3.Lerp(_transform.rotation.eulerAngles,
+                    new Vector3(_transform.rotation.eulerAngles.x,
+                        _transform.rotation.eulerAngles.y + inputModel.CameraRotate, _transform.rotation.eulerAngles.z),
+                    Time.deltaTime * 10));
+                //_transform.Rotate(0,inputModel.CameraRotate * Time.deltaTime * 10,0);
         }
     }
     public AnimationModel GetAnimationModel()
