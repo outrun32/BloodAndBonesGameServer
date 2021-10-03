@@ -92,7 +92,7 @@ public class ServerSend
             _packet.Write(id);
             _packet.Write(isRed);
 
-            SendUDPDataToAll(_packet);
+            SendTCPData(id,_packet);
         }
     }
     public static void PlayerPosition(PlayerSendingDataModel _player)

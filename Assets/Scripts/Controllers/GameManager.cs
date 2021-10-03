@@ -70,9 +70,8 @@ namespace Controllers
             Player player = _spawnController.InstantiatePlayer(_spawnTransforms[character]);
             _spawnTransforms.Add(player, _spawnTransforms[character]);
             _spawnTransforms.Remove(character);
-            Server.clients[character.ID].Respawn(player);
+            Server.clients[character.ID].Respawn(player, _teams[character.Username]);
             _spawnController.DestroyCharacter(character);
-            ServerSend.PlayerTeam(player.ID, _teams[player.Username]);
             player.DeathCharacter += Death;
             player.DeathPlayerEvent += Respawn;
             player.StartSession();
@@ -111,8 +110,8 @@ namespace Controllers
 
             player.DeathCharacter += Death;
             player.DeathPlayerEvent += Respawn;
-            client.SendIntoGame(player);
-            ServerSend.PlayerTeam(player.ID, _teams[player.Username]);
+            client.SendIntoGame(player,_teams);
+            //ServerSend.PlayerTeam(player.ID, _teams[player.Username]);
         }
         public void ClientAdded(Client client)
         {

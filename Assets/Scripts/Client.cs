@@ -244,6 +244,44 @@ public class Client
         }
 
     }
+
+    public void SendIntoGame(Player player, Dictionary<string, bool> listTeam)
+    {
+        Player = player;
+        Player.Initialize(id, Username);
+        //отправляем информацию о всех игроках клиенту, чтобы они появились в его мире
+        foreach (Client client in Server.clients.Values)
+        {
+            Player player1 = client.Player;
+            if (player1 != null)
+            {
+                //Except ourselves
+                if (client.id != id)
+                {
+                    ServerSend.SpawnPlayer(id,
+                        new PlayerSpawnModel(player1.ID, player1.Username, player1.transform,
+                            player1.MAXHealth, player1.MAXMana, player1.StartMana,
+                            player1.StartHealth));
+                    ServerSend.PlayerTeam(id,listTeam[player1.Username]);
+                }
+            }
+        }
+        //аналогичное, но для клиента
+        foreach (Client _client in Server.clients.Values)
+        {
+            Player player1 = Player;
+            if (_client.Player != null)
+            {
+                ServerSend.SpawnPlayer(_client.id,
+                    new PlayerSpawnModel(player1.ID, player1.Username, player1.transform,
+                        player1.MAXHealth, player1.MAXMana, player1.StartMana,
+                        player1.StartHealth));
+                ServerSend.PlayerTeam(id,listTeam[player1.Username]);
+
+            }
+        }
+
+    }
     /// <summary>
     /// Метод для создания игрока и отправки его в игру
     /// </summary>
@@ -263,7 +301,27 @@ public class Client
                         Player.StartHealth));
             }
         }
-
+    }
+    /// <summary>
+    /// Метод для создания игрока и отправки его в игру
+    /// </summary>
+    /// <param name="_playerName">Имя игрока</param>
+    public void Respawn(Player player, bool isRed)
+    {
+        Player = player;
+        Player.Initialize(id, Username);
+        //аналогичное, но для клиента
+        foreach (Client _client in Server.clients.Values)
+        {
+            if (_client.Player != null)
+            {
+                ServerSend.SpawnPlayer(_client.id,
+                    new PlayerSpawnModel(Player.ID, Player.Username, Player.transform,
+                        Player.MAXHealth, Player.MAXMana, Player.StartMana,
+                        Player.StartHealth));
+                ServerSend.PlayerTeam(_client.id, isRed);
+            }
+        }
     }
 
     private void Disconnect()
