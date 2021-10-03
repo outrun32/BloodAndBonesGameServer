@@ -9,7 +9,8 @@ public class PlayerKnightAnimationController : IAnimationContoller
     private AnimatorSettings _animatorSettings;
     private Animator _animator;
     private float _speedUp = 1.2f;
-    private float _speedRotate = 5f;
+    private float _speedRotate = 30f;
+    private float _speedRotateAim = 20f;
     private float _lookAngle = 0;
     private float _lookAngleValue = 0;
     private float _lookAngleSpeed = 5;
@@ -174,7 +175,8 @@ public class PlayerKnightAnimationController : IAnimationContoller
         }
         else
         {
-            if (!isRotate)_transform.Rotate(0,Mathf.Clamp( inputModel.CameraRotate,0,10)* Time.deltaTime * _speedRotate,0);
+            if (!isRotate&& !_isAim)_transform.Rotate(0,Mathf.Clamp( inputModel.CameraRotate,-30,30)* Time.deltaTime * _speedRotate,0);
+            if (!isRotate && _isAim)_transform.Rotate(0,Mathf.Clamp( inputModel.CameraRotate,-10,10)* Time.deltaTime * _speedRotateAim,0);
         }
     }
     public AnimationModel GetAnimationModel()
