@@ -5541,7 +5541,7 @@ MonoBehaviour:
   _spawnController: {fileID: 1931725717}
   _preloadTime: 10
   _isStartTime: 1
-  _endTime: 60
+  _endTime: 180
   _isEndTime: 1
   _spawnsRed:
   - {fileID: 2047481177}
