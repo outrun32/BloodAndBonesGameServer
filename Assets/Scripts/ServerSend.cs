@@ -85,16 +85,17 @@ public class ServerSend
             SendTCPData(_toClient, _packet);
         }
     }
-    public static void PlayerTeam(int id, bool isRed)
+    public static void PlayerTeam(int id,int toID, bool isRed)
     {
         using (Packet _packet = new Packet((int)ServerPackets.setTeam))
         {
             _packet.Write(id);
             _packet.Write(isRed);
 
-            SendTCPData(id,_packet);
+            SendTCPData(toID,_packet);
         }
     }
+    
     public static void PlayerPosition(PlayerSendingDataModel _player)
     {
         using (Packet _packet = new Packet((int)ServerPackets.playerPosition))

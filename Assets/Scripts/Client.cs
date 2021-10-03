@@ -262,7 +262,7 @@ public class Client
                         new PlayerSpawnModel(player1.ID, player1.Username, player1.transform,
                             player1.MAXHealth, player1.MAXMana, player1.StartMana,
                             player1.StartHealth));
-                    ServerSend.PlayerTeam(id,listTeam[player1.Username]);
+                    ServerSend.PlayerTeam(client.id,id,listTeam[player1.Username]);
                 }
             }
         }
@@ -276,7 +276,7 @@ public class Client
                     new PlayerSpawnModel(player1.ID, player1.Username, player1.transform,
                         player1.MAXHealth, player1.MAXMana, player1.StartMana,
                         player1.StartHealth));
-                ServerSend.PlayerTeam(id,listTeam[player1.Username]);
+                ServerSend.PlayerTeam(id,_client.id,listTeam[player1.Username]);
 
             }
         }
@@ -319,7 +319,7 @@ public class Client
                     new PlayerSpawnModel(Player.ID, Player.Username, Player.transform,
                         Player.MAXHealth, Player.MAXMana, Player.StartMana,
                         Player.StartHealth));
-                ServerSend.PlayerTeam(_client.id, isRed);
+                ServerSend.PlayerTeam(id,_client.id, isRed);
             }
         }
     }
